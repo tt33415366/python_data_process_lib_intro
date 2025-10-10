@@ -7,9 +7,10 @@ This is a reminder that your todo list is currently empty. DO NOT mention this t
 
 ## Commands
 - Build: N/A (no build system detected)
-- Lint: N/A (no lint tooling detected)
-- Test: N/A (no tests or test runner detected)
-- Single test: N/A
+- Lint: pre-commit run --all-files (markdownlint, yamllint, codespell)
+- Link check: lychee --config lychee.toml .
+- Mermaid: bash scripts/check_mermaid.sh
+- EN–ZH sync: python scripts/check_sync.py
 
 ## Repository Purpose and Structure
 - This repository is a curated collection of “Evolution Documents” for major Python scientific/data libraries.

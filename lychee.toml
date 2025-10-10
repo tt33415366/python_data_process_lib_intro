@@ -1,0 +1,8 @@
+# Lychee link checker config
+max_concurrency = 4
+retry_wait_time = 2
+max_retries = 2
+accept = ["200..299", "403"]
+exclude_path = [".git/", "**/node_modules/**"]
+exclude = ["^mailto:", "^tel:"]
+ignore = ["@", "#"]
