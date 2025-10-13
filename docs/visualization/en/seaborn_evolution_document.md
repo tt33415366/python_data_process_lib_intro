@@ -154,3 +154,44 @@ mindmap
 ### 5. Conclusion
 
 Seaborn has established itself as an indispensable library for statistical data visualization in Python. By building upon Matplotlib and integrating seamlessly with Pandas, it provides a powerful, high-level, and aesthetically pleasing approach to exploring and understanding data. Its continuous evolution, including the recent Objects Interface, ensures that Seaborn remains at the forefront of data visualization, empowering users to communicate insights effectively and efficiently.
+
+### 6. Typical use cases
+
+- Distribution exploration
+
+```python
+import seaborn as sns
+import pandas as pd
+
+df = pd.DataFrame({"x": sns.load_dataset("tips")["total_bill"]})
+sns.histplot(df, x="x", kde=True)
+```
+
+- Relationships with semantic mapping
+
+```python
+import seaborn as sns
+import pandas as pd
+
+df = sns.load_dataset("penguins").dropna()
+sns.scatterplot(data=df, x="bill_length_mm", y="bill_depth_mm", hue="species", style="sex")
+```
+
+- Figure-level FacetGrid
+
+```python
+import seaborn as sns
+
+df = sns.load_dataset("tips")
+sns.relplot(data=df, x="total_bill", y="tip", col="time", hue="sex", kind="scatter")
+```
+
+- Theming with set_theme
+
+```python
+import seaborn as sns
+
+sns.set_theme(style="whitegrid", palette="deep")
+df = sns.load_dataset("flights")
+sns.lineplot(data=df, x="year", y="passengers")
+```

@@ -148,3 +148,58 @@ mindmap
 ### 5. Conclusion
 
 PyTorch has fundamentally changed the way machine learning models are developed. Its focus on user experience, flexibility, and a "Pythonic" approach has made it the framework of choice for a vast community of researchers and practitioners. The evolution from a dynamic-first research tool to a comprehensive framework with a powerful compiler and a robust production story demonstrates its maturity and long-term vision. By successfully combining ease of use with high performance, PyTorch continues to be a driving force in the advancement of artificial intelligence.
+
+### 6. Typical use cases
+
+#### 6.1. Basic training loop
+
+```python
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+model = nn.Sequential(nn.Linear(10, 64), nn.ReLU(), nn.Linear(64, 1))
+opt = optim.Adam(model.parameters(), lr=1e-3)
+loss_fn = nn.MSELoss()
+
+x = torch.randn(256, 10)
+y = torch.randn(256, 1)
+
+for step in range(200):
+    pred = model(x)
+    loss = loss_fn(pred, y)
+    opt.zero_grad()
+    loss.backward()
+    opt.step()
+```
+
+#### 6.2. Dataset and DataLoader
+
+```python
+from torch.utils.data import Dataset, DataLoader
+import torch
+
+class ToyDataset(Dataset):
+    def __init__(self, n=1000):
+        self.X = torch.randn(n, 32)
+        self.y = (self.X.mean(dim=1) > 0).float()
+    def __len__(self):
+        return len(self.X)
+    def __getitem__(self, idx):
+        return self.X[idx], self.y[idx]
+
+ds = ToyDataset()
+loader = DataLoader(ds, batch_size=64, shuffle=True)
+for xb, yb in loader:
+    pass
+```
+
+#### 6.3. Save and load a model
+
+```python
+import torch
+
+torch.save(model.state_dict(), "model.pt")
+model.load_state_dict(torch.load("model.pt"))
+model.eval()
+```

@@ -100,24 +100,24 @@ Plotly Graph Objects (`go`) is a low-level API that provides extensive control a
 ```mermaid
 mindmap
   root((Plotly API))
-    (Plotly Express (px))
-      (px.scatter)
-      (px.line)
-      (px.bar)
-      (px.histogram)
-      (px.choropleth)
-    (Plotly Graph Objects (go))
-      (go.Figure)
-      (go.Scatter)
-      (go.Bar)
-      (go.Layout)
-      (fig.add_trace)
-      (fig.update_layout)
-    (Subplots)
-      (make_subplots)
-    (Input/Output)
-      (write_html)
-      (to_json)
+    Plotly Express px
+      px scatter
+      px line
+      px bar
+      px histogram
+      px choropleth
+    Plotly Graph Objects go
+      go Figure
+      go Scatter
+      go Bar
+      go Layout
+      fig add_trace
+      fig update_layout
+    Subplots
+      make_subplots
+    Input Output
+      write_html
+      to_json
 ```
 
 ### 4. Evolution and Impact
@@ -131,3 +131,51 @@ mindmap
 ### 5. Conclusion
 
 Plotly has evolved into a comprehensive platform for interactive data visualization and analytical web application development. Its powerful Python API, backed by the robust Plotly.js library, enables users to create stunning and insightful interactive plots. The groundbreaking Dash framework has further extended its impact, empowering data scientists to build and deploy full-fledged web applications with ease. Plotly's continuous innovation, from open-source tools to enterprise solutions and AI-powered features, solidifies its position as a leader in the data visualization and analytical application space.
+
+### 6. Typical use cases
+
+- Quick interactive plot with Plotly Express
+
+```python
+import plotly.express as px
+import pandas as pd
+
+ df = pd.DataFrame({"x": range(10), "y": [v*v for v in range(10)]})
+fig = px.scatter(df, x="x", y="y", color="y", title="Interactive scatter")
+fig.show()
+```
+
+- Fine-grained control with Graph Objects
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=[1, 2, 3], y=[2, 1, 3], mode="lines+markers", name="series"))
+fig.update_layout(title_text="Custom layout", xaxis_title="x", yaxis_title="y")
+fig.show()
+```
+
+- Subplots
+
+```python
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+
+fig = make_subplots(rows=1, cols=2, subplot_titles=("A", "B"))
+fig.add_trace(go.Bar(x=["a", "b"], y=[3, 5]), row=1, col=1)
+fig.add_trace(go.Scatter(x=[1, 2, 3], y=[1, 4, 9], mode="markers"), row=1, col=2)
+fig.update_layout(title_text="Subplots example")
+fig.show()
+```
+
+- Export to standalone HTML
+
+```python
+import plotly.express as px
+import plotly.io as pio
+
+df = px.data.gapminder().query("year == 2007")
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent")
+pio.write_html(fig, "gapminder_2007.html", auto_open=False, include_plotlyjs="cdn")
+```

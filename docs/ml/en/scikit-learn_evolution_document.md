@@ -146,3 +146,69 @@ mindmap
 ### 5. Conclusion
 
 Scikit-learn has played a pivotal role in the popularization of machine learning in Python. Its focus on a consistent, user-friendly API, combined with a comprehensive set of powerful algorithms and a commitment to good development practices, has made it an indispensable tool. It provides a solid foundation for a wide range of machine learning tasks and serves as a benchmark for API design in the broader data science ecosystem.
+
+### 6. Typical use cases
+
+#### 6.1. Binary classification (LogisticRegression)
+
+```python
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+
+X, y = make_classification(n_samples=1000, n_features=20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+clf = Pipeline([
+    ("scaler", StandardScaler()),
+    ("logreg", LogisticRegression(max_iter=1000))
+])
+clf.fit(X_train, y_train)
+print(clf.score(X_test, y_test))
+```
+
+#### 6.2. Cross-validation and hyperparameter search
+
+```python
+from sklearn.model_selection import GridSearchCV
+from sklearn.svm import SVC
+
+param_grid = {"C": [0.1, 1, 10], "gamma": ["scale", "auto"], "kernel": ["rbf"]}
+search = GridSearchCV(SVC(), param_grid, cv=5)
+search.fit(X_train, y_train)
+print(search.best_params_)
+print(search.score(X_test, y_test))
+```
+
+#### 6.3. Pipeline with preprocessing + model
+
+```python
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.impute import SimpleImputer
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.pipeline import Pipeline
+import pandas as pd
+
+# Example mixed-type tabular data
+df = pd.DataFrame({
+    "age": [25, 32, None, 40],
+    "city": ["NY", "SF", "NY", "LA"],
+    "label": [0, 1, 0, 1]
+})
+X = df[["age", "city"]]
+y = df["label"]
+
+preprocess = ColumnTransformer([
+    ("num", Pipeline([("impute", SimpleImputer()), ("scale", StandardScaler())]), ["age"]),
+    ("cat", OneHotEncoder(handle_unknown="ignore"), ["city"]) 
+])
+
+model = Pipeline([
+    ("prep", preprocess),
+    ("rf", RandomForestClassifier(n_estimators=200, random_state=42))
+])
+model.fit(X, y)
+```

@@ -146,3 +146,82 @@ mindmap
 ### 5. Conclusion
 
 NLTK has established itself as a foundational and indispensable library for natural language processing in Python. Its modular architecture, rich collection of algorithms, and extensive linguistic resources provide a powerful toolkit for understanding and working with human language data. While the field of NLP has seen rapid advancements with deep learning, NLTK continues to be a vital resource for foundational tasks, education, and research, serving as a crucial entry point for many into the exciting world of language technology.
+
+### 6. Typical use cases
+
+- Tokenization and POS tagging
+
+```python
+import nltk
+from nltk.tokenize import word_tokenize
+
+nltk.download('punkt', quiet=True)
+nltk.download('averaged_perceptron_tagger', quiet=True)
+
+text = "NLTK makes NLP tasks easy."
+tokens = word_tokenize(text)
+print(tokens)
+print(nltk.pos_tag(tokens))
+```
+
+- Stemming and lemmatization
+
+```python
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+import nltk
+
+nltk.download('wordnet', quiet=True)
+
+stemmer = PorterStemmer()
+lemmatizer = WordNetLemmatizer()
+print(stemmer.stem('running'))
+print(lemmatizer.lemmatize('better', pos='a'))
+```
+
+- Sentence segmentation and parsing
+
+```python
+import nltk
+from nltk.tokenize import sent_tokenize
+
+nltk.download('punkt', quiet=True)
+
+text = "This is a sentence. Here is another one."
+print(sent_tokenize(text))
+
+grammar = nltk.CFG.fromstring("""
+S -> NP VP
+NP -> DT NN
+VP -> VBZ ADJP
+ADJP -> JJ
+DT -> 'The'
+NN -> 'cat'
+VBZ -> 'is'
+JJ -> 'happy'
+""")
+parser = nltk.ChartParser(grammar)
+sent = ['The', 'cat', 'is', 'happy']
+for tree in parser.parse(sent):
+    print(tree)
+```
+
+- Simple text classification
+
+```python
+import nltk
+from nltk.classify import NaiveBayesClassifier
+from nltk.corpus import movie_reviews
+
+nltk.download('movie_reviews', quiet=True)
+
+def doc_features(words):
+    return {w: True for w in words}
+
+train_set = []
+for cat in movie_reviews.categories():
+    for fid in movie_reviews.fileids(cat)[:100]:
+        train_set.append((doc_features(movie_reviews.words(fid)), cat))
+
+classifier = NaiveBayesClassifier.train(train_set)
+print(classifier.classify(doc_features("an excellent and entertaining film".split())))
+```

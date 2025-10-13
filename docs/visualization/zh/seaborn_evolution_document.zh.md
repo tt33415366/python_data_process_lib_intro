@@ -4,7 +4,7 @@
 
 Seaborn 是一个基于 Matplotlib 的 Python 数据可视化库。它提供了一个高级接口，用于绘制美观且信息丰富的统计图形。虽然 Matplotlib 在提供对绘图的精细控制方面表现出色，但 Seaborn 简化了创建复杂统计可视化的过程，使其更容易探索和理解数据，尤其是在使用 Pandas DataFrame 时。
 
-Seaborn 由 Michael Waskom 创建。它的出现是为了解决对生成美观且具有统计意义的图表更简化方法的需求，它建立在 Matplotlib 的基础功能之上。该库的开发重点是提供一个面向数据集的 API，该 API 自动处理 Matplotlib 的许多底层复杂性，允许用户专注于数据中的洞察力，而不是绘图的复杂性。
+Seaborn 由 Michael Waskom 创建。它的出现是为了满足一种更精简的方法来生成美观且具有统计意义的图表的需求，它建立在 Matplotlib 的基础功能之上。该库的开发重点是提供一个面向数据集的 API，该 API 自动处理 Matplotlib 的许多底层复杂性，允许用户专注于数据中的洞察力，而不是绘图的复杂性。
 
 ### 1.1. Seaborn 演进时间线
 
@@ -29,11 +29,11 @@ timeline
 
 ### 2. 核心架构
 
-Seaborn 的核心架构是建立在 Matplotlib 之上的高级抽象层。它利用 Matplotlib 的绘图功能，同时为统计可视化提供更方便和有主见的接口。它还与 Pandas DataFrame 深度集成，使其在处理表格数据时非常有效。
+Seaborn 的核心架构是建立在 Matplotlib 之上的高级抽象层。它利用 Matplotlib 的绘图功能，同时为统计可视化提供更方便且有主见的接口。它还与 Pandas DataFrame 深度集成，使其在处理表格数据时非常有效。
 
 #### 2.1. Matplotlib 后端
 
-Seaborn 依赖 Matplotlib 作为其渲染后端。这意味着 Seaborn 生成的任何图表最终都是 Matplotlib 的 Figure 和 Axes 对象，允许用户使用 Matplotlib 广泛的 API 进一步自定义 Seaborn 图表。这种共生关系使 Seaborn 能够受益于 Matplotlib 的健壮性和灵活性，同时为统计绘图提供更简单的入口点。
+Seaborn 依赖 Matplotlib 作为其渲染后端。这意味着 Seaborn 生成的任何图表最终都是 Matplotlib 的 Figure 和 Axes 对象，允许用户使用 Matplotlib 的广泛 API 进一步自定义 Seaborn 图表。这种共生关系使 Seaborn 能够受益于 Matplotlib 的健壮性和灵活性，同时为统计绘图提供更简单的入口点。
 
 #### 2.2. 面向数据集的 API
 
@@ -106,7 +106,7 @@ Seaborn 的 API 围绕不同类型的统计关系和绘图类别进行组织。
 
 用于以矩阵形式可视化关系。
 
-*   **`sns.heatmap(data, ...)`**: 将矩形数据绘制为颜色编码矩阵。
+*   **`sns.heatmap(data, ...)`**: 将矩形数据绘制为颜色编码的矩阵。
 *   **`sns.pairplot(data, ...)`**: 绘制数据集中成对的关系。
 
 #### 3.6. 主题和实用工具
@@ -149,8 +149,49 @@ mindmap
 *   **连接 Matplotlib 和 Pandas:** 它有效地弥合了 Matplotlib 的低级控制和 Pandas 的高级数据结构之间的鸿沟，为数据科学家提供了强大而直观的工作流程。
 *   **美学默认值:** Seaborn 对样式和调色板的有主见默认值提高了 Python 生态系统中绘图的美学质量标准，使用户更容易创建专业外观的可视化。
 *   **面向数据集的方法:** 其面向数据集的 API 鼓励用户思考数据中的统计关系，而不仅仅是绘图的机制，从而产生更具洞察力的可视化。
-*   **Objects Interface (v0.12+):** 最新版本中引入的 Objects Interface 标志着一个重要的演变，它提供了一种更具声明性和灵活性的方式来构建复杂图表，与现代图形语法原则保持一致。
+*   **Objects Interface (v0.12+):** 最近版本中引入的 Objects Interface 标志着一个重要的演变，它提供了一种更具声明性和灵活性的方式来构建复杂图表，与现代图形语法原则保持一致。
 
 ### 5. 结论
 
 Seaborn 已成为 Python 中统计数据可视化不可或缺的库。通过建立在 Matplotlib 之上并与 Pandas 无缝集成，它提供了一种强大、高级且美观的方法来探索和理解数据。其持续演进，包括最近的 Objects Interface，确保 Seaborn 始终处于数据可视化的前沿，赋能用户有效且高效地传达洞察力。
+
+### 6. 典型用例
+
+- 分布探索
+
+```python
+import seaborn as sns
+import pandas as pd
+
+df = pd.DataFrame({"x": sns.load_dataset("tips")["total_bill"]})
+sns.histplot(df, x="x", kde=True)
+```
+
+- 带语义映射的关系图
+
+```python
+import seaborn as sns
+import pandas as pd
+
+df = sns.load_dataset("penguins").dropna()
+sns.scatterplot(data=df, x="bill_length_mm", y="bill_depth_mm", hue="species", style="sex")
+```
+
+- Figure-level 的 FacetGrid
+
+```python
+import seaborn as sns
+
+df = sns.load_dataset("tips")
+sns.relplot(data=df, x="total_bill", y="tip", col="time", hue="sex", kind="scatter")
+```
+
+- 使用 set_theme 设置主题
+
+```python
+import seaborn as sns
+
+sns.set_theme(style="whitegrid", palette="deep")
+df = sns.load_dataset("flights")
+sns.lineplot(data=df, x="year", y="passengers")
+```

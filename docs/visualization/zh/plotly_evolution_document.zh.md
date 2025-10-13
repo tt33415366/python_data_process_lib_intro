@@ -4,7 +4,7 @@
 
 Plotly 是一家领先的技术计算公司，开发用于数据分析和交互式可视化的开源和企业工具。其 Python 库 Plotly.py 使用户能够创建各种交互式、基于网络的图表、仪表板和分析性网络应用程序。Plotly 的优势在于它能够生成高质量、交互式的可视化，这些可视化可以轻松嵌入网页、Jupyter Notebook 或使用 Dash 等框架集成到强大的网络应用程序中。
 
-Plotly 由 Alex Johnson、Jack Parmer、Chris Parmer 和 Matthew Sundquist 于 2012 年创立。公司最初的重点是创建用户友好、交互式、基于网络的數據可视化工具，特别是针对科学和工程领域。Plotly 历史上的一个重要里程碑是其开源工具的开发，包括 **Plotly.js**（为 Plotly 提供支持的 JavaScript 图形库）、**Plotly.py**（Python 包装器）和 **Dash**（用于构建分析性网络应用程序的开源框架）。
+Plotly 由 Alex Johnson、Jack Parmer、Chris Parmer 和 Matthew Sundquist 于 2012 年成立。公司最初的重点是创建用户友好、交互式、基于网络的数据可视化工具，特别是针对科学和工程领域。Plotly 历史上的一个重要里程碑是其开源工具的开发，包括 **Plotly.js**（为 Plotly 提供支持的 JavaScript 图形库）、**Plotly.py**（Python 包装器）和 **Dash**（用于构建分析性网络应用程序的开源框架）。
 
 Dash 于 2017 年发布，通过允许用户完全使用 Python（或 R 和 Julia）构建交互式网络应用程序，而无需广泛的网络开发知识，彻底改变了分析性网络应用程序的创建。Plotly 继续通过 Dash Enterprise 等产品扩展其产品，Dash Enterprise 是一个旨在帮助组织扩展、发布和安全共享其数据应用程序的平台，最近还推出了 Plotly Studio，这是一款由 AI 驱动的工具，旨在快速将数据转换为交互式应用程序。
 
@@ -38,11 +38,11 @@ Plotly 可视化功能的核心是 **Plotly.js**，一个强大的开源 JavaScr
 
 #### 2.2. Python API (Plotly.py)
 
-Plotly.py 提供了 Plotly.js 的全面 Python 接口。它允许用户使用 Python 对象定义图表、轨迹（数据系列）、布局和其他绘图属性。然后将这些 Python 对象序列化为 Plotly.js 理解的 JSON。这种抽象允许 Python 用户创建复杂的交互式可视化，而无需编写任何 JavaScript。
+Plotly.py 提供了 Plotly.js 的全面 Python 接口。它允许用户使用 Python 对象定义图形、轨迹（数据系列）、布局和其他绘图属性。然后将这些 Python 对象序列化为 Plotly.js 理解的 JSON。这种抽象允许 Python 用户在不编写任何 JavaScript 的情况下创建复杂的交互式可视化。
 
 #### 2.3. Dash 框架集成
 
-**Dash** 是 Plotly 生态系统的一个关键组件，它支持创建交互式分析性网络应用程序。Dash 应用程序通过组合组件（HTML、核心组件、自定义组件）的布局并定义回调来构建，这些回调根据用户交互更新应用程序的输出。Plotly 图表无缝集成到 Dash 应用程序中，从而实现动态和交互式仪表板。
+**Dash** 是 Plotly 生态系统的一个关键组件，它支持创建交互式分析性网络应用程序。Dash 应用程序通过组合组件（HTML、核心组件、自定义组件）的布局并定义回调来构建，这些回调根据用户交互更新应用程序的输出。Plotly 图形无缝集成到 Dash 应用程序中，从而实现动态和交互式仪表板。
 
 **Mermaid 图：Plotly 核心架构**
 
@@ -79,55 +79,103 @@ Plotly Express (`px`) 是一个高级 API，旨在以最少的代码快速生成
 
 Plotly Graph Objects (`go`) 是一个低级 API，它提供对绘图各个方面的广泛控制和自定义。它使用 `Figure`、`layout` 和 `data` 等基本对象进行操作。
 
-*   **`go.Figure(data=None, layout=None)`**: 用于创建和操作图表的主要类。
+*   **`go.Figure(data=None, layout=None)`**: 用于创建和操作图形的主要类。
 *   **`go.Scatter(x, y, mode, ...)`**: 表示散点图轨迹。
 *   **`go.Bar(x, y, ...)`**: 表示条形图轨迹。
-*   **`go.Layout(title, xaxis, yaxis, ...)`**: 定义图表的布局（标题、轴、注释）。
-*   **`fig.add_trace(trace)`**: 向图表添加轨迹。
+*   **`go.Layout(title, xaxis, yaxis, ...)`**: 定义图形的布局（标题、坐标轴、注释）。
+*   **`fig.add_trace(trace)`**: 向图形添加轨迹。
 *   **`fig.update_layout(title_text, ...)`**: 更新布局属性。
 
 #### 3.3. 子图 (`plotly.subplots`)
 
-*   **`plotly.subplots.make_subplots(rows, cols, ...)`**: 创建带有子图网格的图表。
+*   **`plotly.subplots.make_subplots(rows, cols, ...)`**: 创建带有子图网格的图形。
 
 #### 3.4. 输入/输出 (`plotly.io`)
 
-*   **`plotly.io.write_html(fig, file, ...)`**: 将图表写入 HTML 文件。
-*   **`plotly.io.to_json(fig)`**: 将图表转换为其 JSON 表示。
+*   **`plotly.io.write_html(fig, file, ...)`**: 将图形写入 HTML 文件。
+*   **`plotly.io.to_json(fig)`**: 将图形转换为其 JSON 表示。
 
 ### 3.5. API 思维导图
 
 ```mermaid
 mindmap
   root((Plotly API))
-    (Plotly Express (px))
-      (px.scatter)
-      (px.line)
-      (px.bar)
-      (px.histogram)
-      (px.choropleth)
-    (Plotly Graph Objects (go))
-      (go.Figure)
-      (go.Scatter)
-      (go.Bar)
-      (go.Layout)
-      (fig.add_trace)
-      (fig.update_layout)
-    (子图)
-      (make_subplots)
-    (输入/输出)
-      (write_html)
-      (to_json)
+    Plotly Express px
+      px scatter
+      px line
+      px bar
+      px histogram
+      px choropleth
+    Plotly Graph Objects go
+      go Figure
+      go Scatter
+      go Bar
+      go Layout
+      fig add_trace
+      fig update_layout
+    子图
+      make_subplots
+    输入 输出
+      write_html
+      to_json
 ```
 
 ### 4. 演变与影响
 
-*   **交互式可视化标准:** Plotly 为 Python 中的交互式、基于网络的數據可视化设定了高标准，使其成为动态和引人入胜的图表的首选。
-*   **Dash: 彻底改变分析应用程序:** Dash 的引入具有变革性，使数据科学家能够完全使用 Python 构建复杂的交互式网络应用程序，弥合了数据科学与网络开发之间的鸿沟。
-*   **开源生态系统:** Plotly 对开源（Plotly.js、Plotly.py、Dash）的承诺培养了一个充满活力的社区以及丰富的工具和资源生态系统。
+*   **交互式可视化标准:** Plotly 为 Python 中的交互式、基于网络的数据可视化设定了高标准，使其成为动态和引人入胜的图表的首选。
+*   **Dash: 彻底改变分析应用:** Dash 的引入具有变革性，使数据科学家能够完全使用 Python 构建复杂的交互式网络应用程序，弥合了数据科学与网络开发之间的鸿沟。
+*   **开源生态系统:** Plotly 对开源（Plotly.js、Plotly.py、Dash）的承诺培育了一个充满活力的社区以及丰富的工具和资源生态系统。
 *   **企业解决方案:** 借助 Dash Enterprise，Plotly 为组织提供了强大的解决方案，以安全地扩展、部署和管理其分析应用程序，满足生产环境的需求。
 *   **AI 驱动工具 (Plotly Studio):** 最近推出的 AI 驱动工具（如 Plotly Studio）展示了其持续创新，旨在进一步简化和加速创建交互式数据应用程序的过程。
 
 ### 5. 结论
 
-Plotly 已发展成为一个用于交互式数据可视化和分析性网络应用程序开发的综合平台。其强大的 Python API，由健壮的 Plotly.js 库支持，使用户能够创建令人惊叹且富有洞察力的交互式图表。开创性的 Dash 框架进一步扩大了其影响力，使数据科学家能够轻松构建和部署功能齐全的网络应用程序。Plotly 从开源工具到企业解决方案和 AI 驱动功能的持续创新，巩固了其在数据可视化和分析应用程序领域的领导地位。
+Plotly 已发展成为一个用于交互式数据可视化和分析性网络应用程序开发的综合平台。其强大的 Python API，在健壮的 Plotly.js 库支持下，使用户能够创建令人惊叹且富有洞察力的交互式图表。开创性的 Dash 框架进一步扩大了其影响力，使数据科学家能够轻松构建和部署功能齐全的网络应用程序。从开源工具到企业解决方案和 AI 驱动功能，Plotly 的持续创新巩固了其在数据可视化和分析应用程序领域的领导地位。
+
+### 6. 典型用例
+
+- 使用 Plotly Express 快速交互式绘图
+
+```python
+import plotly.express as px
+import pandas as pd
+
+ df = pd.DataFrame({"x": range(10), "y": [v*v for v in range(10)]})
+fig = px.scatter(df, x="x", y="y", color="y", title="交互式散点图")
+fig.show()
+```
+
+- 使用 Graph Objects 进行精细控制
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=[1, 2, 3], y=[2, 1, 3], mode="lines+markers", name="series"))
+fig.update_layout(title_text="自定义布局", xaxis_title="x", yaxis_title="y")
+fig.show()
+```
+
+- 子图
+
+```python
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+
+fig = make_subplots(rows=1, cols=2, subplot_titles=("A", "B"))
+fig.add_trace(go.Bar(x=["a", "b"], y=[3, 5]), row=1, col=1)
+fig.add_trace(go.Scatter(x=[1, 2, 3], y=[1, 4, 9], mode="markers"), row=1, col=2)
+fig.update_layout(title_text="子图示例")
+fig.show()
+```
+
+- 导出为独立 HTML
+
+```python
+import plotly.express as px
+import plotly.io as pio
+
+df = px.data.gapminder().query("year == 2007")
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent")
+pio.write_html(fig, "gapminder_2007.html", auto_open=False, include_plotlyjs="cdn")
+```

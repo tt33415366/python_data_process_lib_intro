@@ -155,3 +155,58 @@ mindmap
 ### 5. Conclusion
 
 TensorFlow's journey from an internal Google project to a global open-source powerhouse has profoundly impacted the field of machine learning. Its robust dataflow graph architecture, combined with powerful features like eager execution and automatic differentiation, provides a flexible and scalable platform for building and deploying state-of-the-art AI models. The continuous evolution, driven by a vibrant community and Google's ongoing commitment, ensures TensorFlow remains at the forefront of AI innovation, empowering researchers and developers to tackle increasingly complex challenges.
+
+### 6. Typical use cases
+
+#### 6.1. Build and train a simple classifier with `tf.keras`
+
+```python
+import tensorflow as tf
+(X_train, y_train), (X_test, y_test) = tf.keras.datasets.mnist.load_data()
+X_train = X_train.reshape(-1, 28*28).astype("float32")/255.0
+X_test  = X_test.reshape(-1, 28*28).astype("float32")/255.0
+
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(128, activation="relu"),
+    tf.keras.layers.Dense(10, activation="softmax")
+])
+model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+model.fit(X_train, y_train, epochs=3, batch_size=64)
+print(model.evaluate(X_test, y_test))
+```
+
+#### 6.2. Input pipeline with `tf.data`
+
+```python
+import tensorflow as tf
+import numpy as np
+
+features = np.random.randn(1000, 32).astype("float32")
+labels = (features.mean(axis=1) > 0).astype("int32")
+
+ds = tf.data.Dataset.from_tensor_slices((features, labels)).shuffle(1000).batch(32)
+for batch_x, batch_y in ds.take(1):
+    print(batch_x.shape, batch_y.shape)
+```
+
+#### 6.3. Custom training loop with `tf.GradientTape`
+
+```python
+import tensorflow as tf
+
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(64, activation="relu"),
+    tf.keras.layers.Dense(1)
+])
+optimizer = tf.keras.optimizers.Adam(1e-3)
+
+x = tf.random.normal((256, 10))
+y = tf.random.normal((256, 1))
+
+for step in range(200):
+    with tf.GradientTape() as tape:
+        pred = model(x, training=True)
+        loss = tf.reduce_mean((pred - y) ** 2)
+    grads = tape.gradient(loss, model.trainable_variables)
+    optimizer.apply_gradients(zip(grads, model.trainable_variables))
+```

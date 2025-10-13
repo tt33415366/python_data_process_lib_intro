@@ -152,3 +152,54 @@ mindmap
 ### 5. Conclusion
 
 spaCy has emerged as a powerful and indispensable library for advanced natural language processing in Python. Its architectural design, focused on performance, efficiency, and production readiness, sets it apart. By offering a comprehensive suite of tools, pre-trained models, and a highly customizable pipeline, spaCy empowers developers and researchers to build robust and scalable NLP applications. The continuous evolution, particularly with the integration of modern deep learning techniques, ensures spaCy remains a leading choice for tackling complex language understanding tasks in real-world scenarios.
+
+### 6. Typical use cases
+
+- Named entity recognition
+
+```python
+import spacy
+
+nlp = spacy.load('en_core_web_sm')
+doc = nlp("Apple is looking at buying U.K. startup for $1 billion")
+print([(ent.text, ent.label_) for ent in doc.ents])
+```
+
+- Dependency parsing and POS
+
+```python
+import spacy
+
+nlp = spacy.load('en_core_web_sm')
+doc = nlp("This is a simple sentence.")
+print([(t.text, t.pos_, t.dep_, t.head.text) for t in doc])
+```
+
+- Pipeline customization with a custom component
+
+```python
+import spacy
+
+nlp = spacy.load('en_core_web_sm')
+
+def to_titlecase(doc):
+    for ent in doc.ents:
+        ent.merge()
+    return spacy.tokens.Doc(nlp.vocab, words=[w.text.title() for w in doc])
+
+# In spaCy v3+, use the @Language.component decorator; here we keep a minimal example
+nlp.add_pipe("sentencizer", first=True)
+doc = nlp("google released new features. apple updated ios.")
+print([sent.text for sent in doc.sents])
+```
+
+- Save and load a trained pipeline
+
+```python
+import spacy
+
+nlp = spacy.load('en_core_web_sm')
+nlp.to_disk('my_model')
+loaded = spacy.load('my_model')
+print(loaded("Hello world").text)
+```
