@@ -53,13 +53,13 @@ A significant architectural aspect of NumPy is its ability to seamlessly integra
 
 ```mermaid
 graph TD
-    A[Python Application] --> B(NumPy Library)
-    B --> C{ndarray Object}
+    A[Python Application] --> B("NumPy Library")
+    B --> C{"ndarray Object"}
     C --> D[Homogeneous Data]
     C --> E[N-dimensional Structure]
     C --> F[Contiguous Memory Block]
     B --> G[Broadcasting Mechanism]
-    B --> H[F2PY - Fortran/C Integration]
+    B --> H["F2PY - Fortran/C Integration"]
     H --> I[Optimized C/Fortran Libraries]
     I --> J[High Performance Numerical Operations]
 ```
@@ -266,12 +266,12 @@ graph TD
     A --> F[Input/Output]
     A --> G["Universal Functions (ufuncs)"]
 
-    B --> B1(np.array, np.zeros, np.arange, np.linspace, ...)
-    C --> C1(reshape, vstack, hstack, concatenate, split, ...)
-    D --> D1(+, -, *, /, @, sum, mean, max, argmax, ...)
-    E --> E1(dot, inv, det, eig, solve, ...)
-    F --> F1(np.load, np.save, np.loadtxt, np.genfromtxt, ...)
-    G --> G1(np.add, np.sin, np.exp, ...)
+    B --> B1("np.array, np.zeros, np.arange, np.linspace, ...")
+    C --> C1("reshape, vstack, hstack, concatenate, split, ...")
+    D --> D1("+, -, *, /, @, sum, mean, max, argmax, ...")
+    E --> E1("dot, inv, det, eig, solve, ...")
+    F --> F1("np.load, np.save, np.loadtxt, np.genfromtxt, ...")
+    G --> G1("np.add, np.sin, np.exp, ...")
 ```
 
 ### 3.7. API Mindmap
@@ -322,3 +322,41 @@ NumPy's evolution has been driven by the needs of the scientific computing commu
 ### 5. Conclusion
 
 NumPy's journey from disparate array packages to a unified, high-performance foundation has been transformative for scientific computing in Python. Its `ndarray` object, coupled with powerful broadcasting, extensive API, and seamless C/Fortran integration, provides an unparalleled platform for numerical operations. The ongoing evolution, driven by performance optimization and community contributions, ensures NumPy remains at the forefront of scientific data processing, continuing to empower researchers and developers across various domains.
+
+### 6. Typical use cases
+
+#### 6.1. Array computations
+
+```python
+import numpy as np
+x = np.arange(1, 6)
+y = np.linspace(0.0, 1.0, 5)
+z = x * y + np.sin(x)
+```
+
+#### 6.2. Broadcasting
+
+```python
+import numpy as np
+A = np.ones((3, 1))
+B = np.arange(3)
+C = A + B
+```
+
+#### 6.3. Linear algebra
+
+```python
+import numpy as np
+M = np.array([[3.0, 1.0], [2.0, 4.0]])
+b = np.array([10.0, 8.0])
+x = np.linalg.solve(M, b)
+```
+
+#### 6.4. I/O with .npy
+
+```python
+import numpy as np
+arr = np.random.rand(2, 3)
+np.save("data.npy", arr)
+loaded = np.load("data.npy")
+```

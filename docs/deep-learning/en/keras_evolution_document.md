@@ -156,3 +156,44 @@ mindmap
 ### 5. Conclusion
 
 Keras has evolved from a standalone library to a powerful, multi-backend deep learning API that simplifies complex neural network tasks. Its consistent focus on user-friendliness, modularity, and rapid experimentation has made it an indispensable tool for deep learning practitioners. With Keras 3.0's renewed commitment to backend agnosticism, it continues to empower users with flexibility and efficiency, solidifying its position as a leading choice for building and deploying deep learning solutions across various domains.
+
+### 6. Typical use cases
+
+#### 6.1. Sequential model for classification
+
+```python
+import keras
+from keras import layers
+
+model = keras.Sequential([
+    layers.Input((784,)),
+    layers.Dense(128, activation="relu"),
+    layers.Dropout(0.2),
+    layers.Dense(10, activation="softmax")
+])
+model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+```
+
+#### 6.2. Functional API with branching
+
+```python
+from keras import layers, Model, Input
+
+inp = Input((32,))
+x1 = layers.Dense(64, activation="relu")(inp)
+x2 = layers.Dense(64, activation="relu")(inp)
+concat = layers.Concatenate()([x1, x2])
+out = layers.Dense(1)(concat)
+model = Model(inp, out)
+model.compile(optimizer="adam", loss="mse")
+```
+
+#### 6.3. Training with callbacks
+
+```python
+from keras.callbacks import EarlyStopping, ModelCheckpoint
+
+es = EarlyStopping(monitor="val_loss", patience=3)
+mcp = ModelCheckpoint("best.keras", monitor="val_loss", save_best_only=True)
+model.fit(X_train, y_train, epochs=20, batch_size=64, validation_split=0.2, callbacks=[es, mcp])
+```

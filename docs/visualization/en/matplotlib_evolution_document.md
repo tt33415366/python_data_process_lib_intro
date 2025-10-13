@@ -179,3 +179,63 @@ mindmap
 ### 5. Conclusion
 
 Matplotlib has cemented its position as the indispensable plotting library for Python. Born out of a need for open-source scientific visualization, it has grown into a powerful, flexible, and highly customizable tool. Its layered architecture, dual API interfaces, and continuous evolution ensure that it remains at the forefront of data visualization, empowering researchers and developers to effectively communicate insights through compelling graphics.
+
+### 6. Typical use cases
+
+- Quick plotting with pyplot
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 2*np.pi, 200)
+y = np.sin(x)
+
+plt.plot(x, y, label="sin(x)")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("Quick sine wave")
+plt.legend()
+plt.show()
+```
+
+- Object-oriented subplots and customization
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 2*np.pi, 200)
+fig, axes = plt.subplots(1, 2, figsize=(8, 3))
+axes[0].plot(x, np.sin(x), color="tab:blue")
+axes[0].set_title("sin(x)")
+axes[1].plot(x, np.cos(x), color="tab:orange", linestyle="--")
+axes[1].set_title("cos(x)")
+fig.suptitle("Trigonometric functions")
+fig.tight_layout()
+plt.show()
+```
+
+- Styling with style sheets
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.style.use("seaborn-v0_8-darkgrid")
+x = np.linspace(0, 10, 100)
+plt.scatter(x, np.sqrt(x), s=30, c=x, cmap="viridis")
+plt.colorbar(label="x")
+plt.title("Styled scatter with color mapping")
+plt.show()
+```
+
+- Saving figures with DPI
+
+```python
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.bar(["A", "B", "C"], [3, 5, 2])
+fig.savefig("bar_high_res.png", dpi=300, bbox_inches="tight")
+```

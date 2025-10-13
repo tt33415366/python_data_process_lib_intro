@@ -4,9 +4,9 @@
 
 Matplotlib 是一个用于在 Python 中创建静态、动画和交互式可视化的综合库。它是科学 Python 生态系统的基石，提供了一个灵活而强大的工具，用于在数据科学、工程和研究等各个领域生成高质量的图表和图形。
 
-Matplotlib 最初由 John Hunter 于 2003 年构思和开发。作为一名神经生物学家，Hunter 试图用一个开源的、基于 Python 的替代方案来取代专有的基于 MATLAB 的工具，用于分析脑电图 (ECOG) 信号。他的目标是创建一个绘图库，该库提供与 MATLAB 绘图功能类似的接口和功能，但位于 Python 环境中，从而实现研究人员之间更大的可扩展性和协作。
+Matplotlib 最初由 John Hunter 于 2003 年构思和开发。作为一名神经生物学家，Hunter 试图用一个开源的、基于 Python 的替代方案来取代专有的基于 MATLAB 的工具，用于分析脑电图 (ECOG) 信号。他的目标是创建一个绘图库，该库提供与 MATLAB 绘图函数类似的接口和功能，但位于 Python 环境中，从而实现研究人员之间更大的可扩展性和协作。
 
-自成立以来，Matplotlib 已从一个类似 MATLAB 的脚本界面发展成为一个健壮的、面向对象的绘图库。它广泛利用 NumPy 进行数值运算，并培养了一个充满活力的开源社区，该社区继续推动其开发和维护。
+自成立以来，Matplotlib 已从一个类似 MATLAB 的脚本界面发展成为一个健壮的、面向对象的绘图库。它广泛利用 NumPy 进行数值运算，并培育了一个充满活力的开源社区，该社区继续推动其开发和维护。
 
 ### 1.1. Matplotlib 演进时间线
 
@@ -48,7 +48,7 @@ Matplotlib 的架构采用分层结构，提供不同级别的控制和抽象。
 这是中间层，大部分绘图逻辑都位于此处。Matplotlib 图表上可见的一切都是 `Artist` 对象。Artist 可以是原始的 (例如，`Line2D`、`Rectangle`、`Text`) 或复合的 (其他 Artist 的集合)。
 
 *   **`Figure`**: 所有绘图元素的顶级容器。它可以包含多个 `Axes` 对象、标题、图例和其他 Artist。
-*   **`Axes`**: 最重要的 `Artist` 对象，表示单个绘图区域。大多数绘图方法 (例如，`plot()`、`scatter()`、`hist()`) 都定义为 `Axes` 对象的方法。一个 `Axes` 对象包含两个 (或 3D 中的三个) `Axis` 对象，它们处理刻度、刻度标签和轴标签。
+*   **`Axes`**: 最重要的 `Artist` 对象，表示单个绘图区。大多数绘图方法 (例如，`plot()`、`scatter()`、`hist()`) 都定义为 `Axes` 对象的方法。一个 `Axes` 对象包含两个 (或 3D 中的三个) `Axis` 对象，它们处理刻度、刻度标签和轴标签。
 
 #### 2.3. 脚本层 (`pyplot`)
 
@@ -179,3 +179,63 @@ mindmap
 ### 5. 结论
 
 Matplotlib 已经巩固了其作为 Python 不可或缺的绘图库的地位。它诞生于对开源科学可视化的需求，现已发展成为一个强大、灵活且高度可定制的工具。其分层架构、双重 API 接口和持续演进确保它始终处于数据可视化的前沿，使研究人员和开发人员能够通过引人注目的图形有效地传达见解。
+
+### 6. 典型用例
+
+- 使用 pyplot 快速绘图
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 2*np.pi, 200)
+y = np.sin(x)
+
+plt.plot(x, y, label="sin(x)")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("快速绘制正弦波")
+plt.legend()
+plt.show()
+```
+
+- 面向对象的子图与定制
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 2*np.pi, 200)
+fig, axes = plt.subplots(1, 2, figsize=(8, 3))
+axes[0].plot(x, np.sin(x), color="tab:blue")
+axes[0].set_title("sin(x)")
+axes[1].plot(x, np.cos(x), color="tab:orange", linestyle="--")
+axes[1].set_title("cos(x)")
+fig.suptitle("三角函数")
+fig.tight_layout()
+plt.show()
+```
+
+- 使用样式表进行美化
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.style.use("seaborn-v0_8-darkgrid")
+x = np.linspace(0, 10, 100)
+plt.scatter(x, np.sqrt(x), s=30, c=x, cmap="viridis")
+plt.colorbar(label="x")
+plt.title("带颜色映射的样式化散点图")
+plt.show()
+```
+
+- 保存高分辨率图片
+
+```python
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.bar(["A", "B", "C"], [3, 5, 2])
+fig.savefig("bar_high_res.png", dpi=300, bbox_inches="tight")
+```

@@ -51,9 +51,9 @@ Internally, a `DataFrame` is a collection of `Series`, each of which is backed b
 
 ```mermaid
 graph TD
-    A[User Application] --> B(Pandas Library)
-    B --> C{DataFrame Object}
-    B --> D{Series Object}
+    A[User Application] --> B("Pandas Library")
+    B --> C{"DataFrame Object"}
+    B --> D{"Series Object"}
     C --> E[Column Index]
     C --> F["Row Index (Index Object)"]
     D --> F
@@ -195,3 +195,36 @@ mindmap
 ### 5. Conclusion
 
 Pandas transformed data analysis in Python from a niche capability into a mainstream practice. Its intuitive `DataFrame` and `Series` objects, combined with a rich and expressive API, provide a powerful and flexible toolkit for real-world data wrangling. The library's evolution reflects a deep commitment to performance, usability, and interoperability, ensuring that pandas remains an essential tool for anyone working with data in Python.
+
+### 6. Typical use cases
+
+#### 6.1. Data ingestion
+
+```python
+import pandas as pd
+df = pd.read_csv("data.csv")
+```
+
+#### 6.2. Cleaning missing values
+
+```python
+import pandas as pd
+df = pd.DataFrame({"a": [1, None, 3]})
+clean = df.fillna(0)
+```
+
+#### 6.3. Filtering and selection
+
+```python
+import pandas as pd
+df = pd.DataFrame({"age": [22, 35, 29], "name": ["A", "B", "C"]})
+adults = df[df["age"] >= 30][["name", "age"]]
+```
+
+#### 6.4. Group by and aggregation
+
+```python
+import pandas as pd
+df = pd.DataFrame({"cat": ["x", "x", "y"], "price": [5, 7, 3]})
+stats = df.groupby("cat").agg({"price": ["mean", "sum"]})
+```
