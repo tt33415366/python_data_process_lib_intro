@@ -604,7 +604,7 @@ for i, (key, start, end) in enumerate(sorted(prof.results, key=lambda x: x[2] - 
 | `dask.visualize()` | 显示任务图 | 用于调试和优化 |
 | `ProgressBar()` | 监控进度 | 用于长时间运行的计算 |
 
-### 3.4. API 思维导图
+#### 3.4. API 思维导图
 
 ```mermaid
 mindmap
@@ -644,7 +644,7 @@ mindmap
       (资源监控)
 ```
 
-### 3.5. 真实世界用例：大规模数据处理
+#### 3.5. 真实世界用例：大规模数据处理
 
 ##### 3.5.1. 完整示例：处理时间序列数据
 
