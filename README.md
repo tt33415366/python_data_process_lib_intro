@@ -1,0 +1,183 @@
+# Python Scientific Computing Evolution Documentation
+
+[![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg)](./docs/)
+[![Language Support](https://img.shields.io/badge/languages-EN%20%7C%20ZH-blue.svg)]()
+[![Libraries Covered](https://img.shields.io/badge/libraries-15+-orange.svg)]()
+
+> 🔬 **A comprehensive knowledge base documenting the evolution, architecture, and APIs of major Python scientific computing and data science libraries.**
+
+## 📖 Overview
+
+This repository contains a curated collection of **Evolution Documents** that provide deep insights into the history, architecture, and API development of essential Python libraries in the scientific computing ecosystem. Each document serves as both a historical record and a practical reference guide.
+
+### 🎯 Project Purpose
+
+- **Historical Context**: Track the evolution and major milestones of key Python libraries
+- **Architectural Understanding**: Explain core concepts and design principles
+- **API Reference**: Comprehensive documentation of functions, classes, and methods
+- **Cross-Library Insights**: Understand relationships and dependencies between libraries
+- **Educational Resource**: Support learning and teaching of scientific Python
+
+## 🏗️ Repository Structure
+
+```
+docs/
+├── data-processing/     # Data manipulation and numerical computing
+│   ├── en/             # English documentation
+│   └── zh/             # Chinese documentation (中文文档)
+├── deep-learning/      # Neural networks and deep learning frameworks
+│   ├── en/
+│   └── zh/
+├── ml/                 # Traditional machine learning libraries
+│   ├── en/
+│   └── zh/
+├── nlp/                # Natural language processing tools
+│   ├── en/
+│   └── zh/
+├── visualization/      # Data visualization and plotting libraries
+│   ├── en/
+│   └── zh/
+└── context/           # Project metadata and guidance
+```
+
+## 📚 Covered Libraries
+
+### 🔢 Data Processing & Numerical Computing
+- **[NumPy](./docs/data-processing/en/numpy_evolution_document.md)** - Fundamental package for scientific computing
+- **[Pandas](./docs/data-processing/en/pandas_evolution_document.md)** - Data manipulation and analysis
+- **[SciPy](./docs/data-processing/en/scipy_evolution_document.md)** - Scientific computing algorithms
+- **[Dask](./docs/data-processing/en/dask_evolution_document.md)** - Parallel computing and big data
+
+### 🧠 Deep Learning Frameworks
+- **[PyTorch](./docs/deep-learning/en/pytorch_evolution_document.md)** - Dynamic neural networks and research
+- **[TensorFlow](./docs/deep-learning/en/tensorflow_evolution_document.md)** - Production-ready machine learning
+- **[Keras](./docs/deep-learning/en/keras_evolution_document.md)** - High-level neural network API
+
+### 🤖 Machine Learning
+- **[Scikit-learn](./docs/ml/en/scikit-learn_evolution_document.md)** - General-purpose machine learning
+- **[XGBoost](./docs/ml/en/xgboost_evolution_document.md)** - Gradient boosting framework
+- **[LightGBM](./docs/ml/en/lightgbm_evolution_document.md)** - Fast gradient boosting
+
+### 📝 Natural Language Processing
+- **[NLTK](./docs/nlp/en/nltk_evolution_document.md)** - Natural language toolkit
+- **[spaCy](./docs/nlp/en/spacy_evolution_document.md)** - Industrial-strength NLP
+
+### 📊 Data Visualization
+- **[Matplotlib](./docs/visualization/en/matplotlib_evolution_document.md)** - Foundational plotting library
+- **[Plotly](./docs/visualization/en/plotly_evolution_document.md)** - Interactive visualizations
+- **[Seaborn](./docs/visualization/en/seaborn_evolution_document.md)** - Statistical data visualization
+
+## 🌐 Language Support
+
+All documentation is available in both **English** and **Chinese (中文)**:
+
+- **English**: `*_evolution_document.md`
+- **Chinese**: `*_evolution_document.zh.md`
+
+## 📋 Document Structure
+
+Each evolution document follows a consistent architecture:
+
+### 🏛️ Standard Sections
+
+1. **📜 Introduction & Historical Context**
+   - Library origins and motivation
+   - Evolution timeline with key milestones
+   - Community and ecosystem impact
+
+2. **🔧 Core Architecture**
+   - Fundamental concepts and abstractions
+   - Design principles and patterns
+   - Integration points with other libraries
+
+3. **🔍 Detailed API Overview**
+   - Major functional areas
+   - Key classes and methods
+   - Notable changes and deprecations
+   - Interactive Mermaid diagrams for API structure
+
+4. **📈 Evolution & Performance**
+   - Performance improvements over time
+   - Ecosystem relationships
+   - Build system and development maturity
+
+5. **🎯 Conclusion & Future Trajectory**
+   - Current significance in the ecosystem
+   - Ongoing development trends
+   - Future roadmap considerations
+
+### 🎨 Visual Elements
+
+- **📊 Mermaid Diagrams**: Timelines, architecture graphs, and API mindmaps
+- **💡 Mental Models**: Analogies and conceptual explanations
+- **✅ Code Examples**: Practical usage demonstrations
+- **🔗 Cross-References**: Links between related libraries and concepts
+
+## 🚀 Getting Started
+
+### 📖 For Readers
+
+1. **Browse by Category**: Navigate to your area of interest (data-processing, ml, etc.)
+2. **Choose Language**: Select English (`.md`) or Chinese (`.zh.md`) version
+3. **Follow the Structure**: Start with Introduction, then dive into specific API sections
+4. **Use Diagrams**: Mermaid diagrams provide visual understanding of complex concepts
+
+### 🛠️ For Contributors
+
+1. **Consistent Structure**: Follow the established document architecture
+2. **Bilingual Updates**: Maintain synchronization between EN/ZH versions
+3. **Mermaid Integration**: Use diagrams for timelines, architectures, and API overviews
+4. **Cross-Library Consistency**: Apply "think by analogy" - propagate improvements across similar libraries
+
+## 🔧 Technical Requirements
+
+### 📋 Prerequisites
+
+- **Markdown Renderer**: Ensure your viewer supports Mermaid diagrams
+- **No Build System**: Pure Markdown documentation (no compilation required)
+- **No Dependencies**: Self-contained documentation
+
+### 🎯 Recommended Tools
+
+- **GitHub/GitLab**: Native Mermaid support
+- **VS Code**: Markdown Preview Enhanced extension
+- **Obsidian**: Excellent for cross-linking and graph view
+- **Typora**: Real-time Markdown rendering with Mermaid
+
+## 🤝 Contributing
+
+We welcome contributions to improve and expand this knowledge base!
+
+### 🎯 Contribution Areas
+
+- **📝 Content Updates**: Keep documentation current with library changes
+- **🌐 Translation**: Improve or add language support
+- **🎨 Visualization**: Enhance Mermaid diagrams and visual elements
+- **🔗 Cross-References**: Add connections between related concepts
+- **📚 New Libraries**: Suggest additional libraries to document
+
+### 📋 Guidelines
+
+1. **Follow SRP**: Each document should have a single, clear responsibility
+2. **Maintain Consistency**: Use established patterns and terminology
+3. **Update Pairs**: Keep EN/ZH versions synchronized
+4. **Test Diagrams**: Verify Mermaid syntax renders correctly
+5. **Cross-Reference**: Link related concepts across documents
+
+## 📄 License
+
+This documentation collection is provided as an educational resource. Individual libraries mentioned are subject to their respective licenses.
+
+## 🙏 Acknowledgments
+
+This project builds upon the incredible work of the Python scientific computing community. Special thanks to the maintainers and contributors of all documented libraries who make this ecosystem possible.
+
+---
+
+**📚 Start exploring**: Choose a library from the [Covered Libraries](#-covered-libraries) section above, or browse the `docs/` directory structure.
+
+**🔍 Quick Navigation**: 
+- [Data Processing](./docs/data-processing/) | [Deep Learning](./docs/deep-learning/) | [Machine Learning](./docs/ml/) | [NLP](./docs/nlp/) | [Visualization](./docs/visualization/)
+- [English Docs](./docs/) | [中文文档](./docs/)
+
+**💡 Need Help?** Check out [CODEBUDDY.md](./CODEBUDDY.md) for detailed repository guidance and conventions.
