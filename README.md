@@ -178,6 +178,6 @@ This project builds upon the incredible work of the Python scientific computing 
 
 **🔍 Quick Navigation**: 
 - [Data Processing](./docs/data-processing/) | [Deep Learning](./docs/deep-learning/) | [Machine Learning](./docs/ml/) | [NLP](./docs/nlp/) | [Visualization](./docs/visualization/)
-- [English Docs](./docs/) | [中文文档](./docs/)
+- [English Docs](./README.md) | [中文文档](./README.zh.md)
 
 **💡 Need Help?** Check out [CODEBUDDY.md](./CODEBUDDY.md) for detailed repository guidance and conventions.
