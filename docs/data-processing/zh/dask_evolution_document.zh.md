@@ -125,8 +125,8 @@ mindmap
         (client.submit)
         (future.result)
     (计算与实用工具)
-      (compute())
-      (persist())
+      ("compute()")
+      ("persist()")
       (dask.visualize)
 ```
 
