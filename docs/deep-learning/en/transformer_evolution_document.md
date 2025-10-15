@@ -48,6 +48,25 @@ The attention score is calculated by taking the dot product of the Query of the 
 
 **Formula:** `Attention(Q, K, V) = softmax(Q * K^T / sqrt(d_k)) * V`
 
+**Formula Breakdown:**
+- **K^T**: Represents the transpose operation of the key matrix K
+  - If K has dimensions `[seq_len, d_k]`, then `K^T` has dimensions `[d_k, seq_len]`
+  - Transpose is needed to enable matrix multiplication between Q and K^T
+- **d_k**: Represents the dimension of key vectors (dimension of key vectors)
+  - This is the feature dimension size of each key vector
+  - Usually equals the model's hidden dimension divided by the number of attention heads
+  - Example: model dimension 512, 8 attention heads, then `d_k = 512/8 = 64`
+- **sqrt(d_k)**: Scaling factor used for:
+  - Preventing large dot product values when d_k is large, which would cause softmax to enter saturation regions
+  - Maintaining numerical stability and ensuring attention weight distribution remains uniform
+  - Controlling the variance of dot product results within reasonable ranges
+
+**Computation Steps:**
+1. Perform matrix multiplication between Q and K^T to get attention scores
+2. Scale by dividing by sqrt(d_k)
+3. Apply softmax to obtain attention weights
+4. Multiply with V to get final output
+
 #### 2.2. Multi-Head Attention
 
 Instead of performing a single attention calculation, the Transformer uses **Multi-Head Attention**. This mechanism splits the Q, K, and V vectors into multiple smaller, parallel "attention heads."
