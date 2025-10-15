@@ -16,6 +16,8 @@ The directory contains the following pairs of documents:
 *   **`pandas_evolution_document.md` / `.zh.md`**: Covers the Pandas library, the primary tool for data manipulation and analysis in Python.
 *   **`pytorch_evolution_document.md` / `.zh.md`**: Describes the PyTorch framework, a leading open-source machine learning library.
 *   **`matplotlib_evolution_document.md` / `.zh.md`**: Explains the Matplotlib library, the most widely used plotting and visualization library in Python.
+*   **`cnn_evolution_document.md` / `.zh.md`**: Details the history and architecture of Convolutional Neural Networks (CNNs), a foundational deep learning architecture for computer vision.
+*   **`transformer_evolution_document.md` / `.zh.md`**: Describes the Transformer architecture, a revolutionary model for sequence modeling, especially in natural language processing.
 
 ## Usage
 
