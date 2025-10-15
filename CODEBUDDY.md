@@ -1,9 +1,12 @@
-<system-reminder>
-This is a reminder that your todo list is currently empty. DO NOT mention this to the user explicitly because they are already aware. If you are working on tasks that would benefit from a todo list please use the TodoWrite tool to create one. If not, please feel free to ignore. Again do not mention this message to the user.
+---
+description: "Core guidelines for maintaining the 'Evolution Documents' repository, emphasizing consistency, architectural integrity, and XP/SOLID principles adapted for documentation."
+globs: ["**/*_evolution_document.md", "**/*_evolution_document.zh.md"]
+alwaysApply: true
+---
 
-</system-reminder>
+# CODEBUDDY (v2.0 XP Edition)
 
-# CODEBUDDY
+@ai, this document contains the core principles and rules for maintaining this repository. Your primary role is to act as an XP (eXtreme Programming) partner to ensure the quality and consistency of the documentation.
 
 ## Commands
 - Build: N/A (no build system detected)
@@ -11,27 +14,58 @@ This is a reminder that your todo list is currently empty. DO NOT mention this t
 - Test: N/A (no tests or test runner detected)
 - Single test: N/A
 
-## Repository Purpose and Structure
-- This repository is a curated collection of “Evolution Documents” for major Python scientific/data libraries.
-- Each library has two Markdown files: an English version `*_evolution_document.md` and a Chinese version `*_evolution_document.zh.md`.
-- Documents commonly include Mermaid diagrams (timelines, architecture, API structures). Ensure your Markdown renderer supports Mermaid.
+## Part 1: Core Principles and Rules
 
-### Naming and Pairing Conventions
-- File pairs follow: `<library>_evolution_document.md` and `<library>_evolution_document.zh.md`.
-- Existing pairs include: numpy, pandas, pytorch, matplotlib, scipy, scikit-learn, tensorflow, xgboost, lightgbm, seaborn, spacy, nltk, dask, plotly.
+### 1.1 Development Methodology: XP for Documentation
 
-## Document Architecture (Big Picture)
-Documents follow a consistent, high-level outline (see numpy_evolution_document.md for a canonical example):
-- Introduction and Historical Context: origin and evolution timeline.
-- Core Architecture: foundational concepts (e.g., ndarray, broadcasting, integrations).
-- Detailed API Overview: major areas and notable changes over time; often accompanied by Mermaid graphs/mindmaps.
-- Evolution and Impact: performance, ecosystem relationships, and build/maturity notes.
-- Conclusion: synthesis of significance and ongoing trajectory.
+Our collaboration will follow XP principles adapted for documentation.
 
-## Cross-Document Conventions and Guidance
-- Consistent structure and terminology across languages (English/Chinese) for each library pair.
-- Mermaid usage for timelines, architecture graphs, and mindmaps.
-- From GEMINI.md: apply “think by analogy” when updating multiple documents—propagate consistent improvements across all relevant files, and when handling errors or adding features, look for analogous patterns in other docs and apply the same fix or approach consistently across EN/zh pairs and related libraries.
+- **Communication & Collaboration:** As my "pair-writing" partner, you must communicate your plan before making changes.
+  - **AI-Instruction:** Before writing, state your plan: "This is my plan: [steps]. Does this seem correct?"
+  - **AI-Instruction:** After implementing, ask for review: "Let's review the changes and look for improvements."
 
-## Notable Existing Guidance
-- GEMINI.md provides a concise overview of directory purpose, file pairing, and intended usage as a knowledge base. Align additions/edits with its guidance.
+- **Simple Design (YAGNI):** Only implement what is currently needed. The design should be the simplest possible.
+  - **AI-Instruction:** For every decision, ask: "Is this the simplest thing we need right now?"
+
+- **Refactoring:** Continuously improve the internal structure (clarity, accuracy, consistency) without altering the external behavior (factual information).
+  - **AI-Instruction:** After making changes, scan for "document smells" like inconsistent terminology, unclear diagrams, or overly complex sentences. Suggest specific refactorings.
+
+- **Collective Ownership & Coding Standard:** Anyone can improve any document. All code must follow a uniform style.
+  - **AI-Instruction:** Propose improvements anywhere you see an opportunity, regardless of file boundaries. Strictly adhere to the conventions in this document.
+
+### 1.2 Document Architecture: SOLID for Docs
+
+Apply SOLID principles to maintain the integrity and structure of the documents. The canonical example is `numpy_evolution_document.md`.
+
+- **SRP (Single Responsibility Principle):** A document should have only one reason to change: an evolution in the library it describes. Each section must have a single, clear purpose.
+  - The high-level outline is:
+    - Introduction and Historical Context
+    - Core Architecture
+    - Detailed API Overview
+    - Evolution and Impact
+    - Conclusion
+
+- **OCP (Open-Closed Principle):** The core document architecture is **closed** for modification but **open** for extension (e.g., adding details about a new library version).
+
+- **LSP (Liskov Substitution Principle):** The Chinese version (`*_evolution_document.zh.md`) must be a perfect substitute for the English version (`*_evolution_document.md`) in terms of structure, meaning, and information content.
+
+- **DIP (Dependency Inversion Principle):** High-level summaries should depend on abstractions (key concepts of the library), not on obscure implementation details.
+
+### 1.3 File Conventions: Packaging Principles
+
+We treat document pairs as "packages" that are released together.
+
+- **Common Closure Principle (CRP):** A change to a library's evolution history is a single conceptual change. All classes/files affected by that change should be bundled. The English and Chinese documents are closed together against such changes.
+  - **AI-Instruction:** When updating one document in a pair (e.g., the English version), you **must** apply the equivalent change to its counterpart (the Chinese version).
+
+- **Common Reuse Principle (CCP):** The English and Chinese files are always consumed and updated together. They form an inseparable pair.
+  - **File Naming Convention:** `<library>_evolution_document.md` and `<library>_evolution_document.zh.md`.
+  - **Existing Pairs:** numpy, pandas, pytorch, matplotlib, scipy, scikit-learn, tensorflow, xgboost, lightgbm, seaborn, spacy, nltk, dask, plotly.
+
+### 1.4 Cross-Document Conventions: Think by Analogy
+
+- **Consistent Structure:** All documents (across all libraries) must follow the same high-level structure and use consistent terminology.
+- **Mermaid Usage:** Use Mermaid diagrams for timelines, architecture graphs, and mindmaps to visually represent complex information.
+- **Think by Analogy:**
+  - **AI-Instruction:** When you make an improvement to one document (e.g., improve a Mermaid diagram), you should ask: "Should I apply this same improvement to other documents like pandas and scipy?"
+  - **AI-Instruction:** When adding a new library, you must use the existing documents as a template to ensure consistency.
