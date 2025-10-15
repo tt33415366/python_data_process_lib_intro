@@ -54,6 +54,7 @@ docs/
 - **[Keras](./docs/deep-learning/zh/keras_evolution_document.zh.md)** - 高级神经网络 API
 - **[CNN](./docs/deep-learning/zh/cnn_evolution_document.zh.md)** - 用于计算机视觉的卷积神经网络
 - **[Transformer](./docs/deep-learning/zh/transformer_evolution_document.zh.md)** - 用于序列处理的基于注意力的模型
+- **[图解 Transformer](./docs/deep-learning/zh/the_annotated_transformer.zh.md)** - Transformer 模型的带注释实现
 
 ### 🤖 机器学习
 - **[Scikit-learn](./docs/ml/zh/scikit-learn_evolution_document.zh.md)** - 通用机器学习

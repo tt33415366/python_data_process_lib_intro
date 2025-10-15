@@ -54,6 +54,7 @@ docs/
 - **[Keras](./docs/deep-learning/en/keras_evolution_document.md)** - High-level neural network API
 - **[CNN](./docs/deep-learning/en/cnn_evolution_document.md)** - Convolutional Neural Networks for computer vision
 - **[Transformer](./docs/deep-learning/en/transformer_evolution_document.md)** - Attention-based models for sequence processing
+- **[The Annotated Transformer](./docs/deep-learning/en/the_annotated_transformer.md)** - An annotated implementation of the Transformer model
 
 ### 🤖 Machine Learning
 - **[Scikit-learn](./docs/ml/en/scikit-learn_evolution_document.md)** - General-purpose machine learning

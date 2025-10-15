@@ -85,7 +85,7 @@ graph TD
     D1[Output Embeddings + Positional Encoding] --> D2
     
     subgraph Encoder Layer
-        C1[Input] --> C2[Multi-Head Self-Attention (Q, K, V from Input)]
+        C1[Input] --> C2["Multi-Head Self-Attention (Q, K, V from Input)"]
         C2 --> C3[Add & Norm]
         C3 --> C4[Feed Forward]
         C4 --> C5[Add & Norm]
@@ -95,7 +95,7 @@ graph TD
     D["Decoder Stack (N layers)"] --> E[Final Linear & Softmax]
 
     subgraph Decoder Layer
-        D2[Input] --> D3[Masked Multi-Head Self-Attention (Q, K, V from Input)]
+        D2[Input] --> D3["Masked Multi-Head Self-Attention (Q, K, V from Input)"]
         D3 --> D3_2[Add & Norm]
         D3_2 -- Q --> D4[Encoder-Decoder Attention]
         D4 --> D5[Add & Norm]
