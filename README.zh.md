@@ -52,6 +52,8 @@ docs/
 - **[PyTorch](./docs/deep-learning/zh/pytorch_evolution_document.zh.md)** - 动态神经网络和研究
 - **[TensorFlow](./docs/deep-learning/zh/tensorflow_evolution_document.zh.md)** - 生产就绪的机器学习
 - **[Keras](./docs/deep-learning/zh/keras_evolution_document.zh.md)** - 高级神经网络 API
+- **[CNN](./docs/deep-learning/zh/cnn_evolution_document.zh.md)** - 用于计算机视觉的卷积神经网络
+- **[Transformer](./docs/deep-learning/zh/transformer_evolution_document.zh.md)** - 用于序列处理的基于注意力的模型
 
 ### 🤖 机器学习
 - **[Scikit-learn](./docs/ml/zh/scikit-learn_evolution_document.zh.md)** - 通用机器学习
