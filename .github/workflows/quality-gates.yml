@@ -19,12 +19,16 @@ jobs:
       - name: Install tools
         run: |
           pip install codespell
-                    npm i -g markdownlint-cli@0.41.0 @mermaid-js/mermaid-cli@10.9.1
+          pip install lychee-link-checker
+          npm i -g markdownlint-cli@0.41.0 @mermaid-js/mermaid-cli@10.9.1
           pip install yamllint
           pip install pre-commit
       - name: Pre-commit
         run: |
           pre-commit run --all-files
+      - name: Link check (lychee)
+        run: |
+          lychee --config lychee.toml --accept 200-299,403 --verbose . || (echo "Lychee found issues" && exit 1)
       - name: Mermaid render check
         run: |
           bash scripts/check_mermaid.sh
