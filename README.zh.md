@@ -25,6 +25,9 @@ docs/
 ├── computer-graphics/ # 几何建模与渲染
 │   ├── en/
 │   └── zh/
+├── gpu-computing/     # GPU 加速计算
+│   ├── en/
+│   └── zh/
 ├── data-processing/     # 数据处理和数值计算
 │   ├── en/             # 英文文档
 │   └── zh/             # 中文文档
@@ -77,6 +80,9 @@ docs/
 - **[G2 融合算法](./docs/computer-graphics/zh/g2_blending_algorithm_evolution_document.zh.md)** - 几何建模中 G2 连续性的方法
 - **[李代数方法](./docs/computer-graphics/zh/lie_algebra_method_evolution_document.zh.md)** - 连续对称性的数学方法
 - **[NURBS](./docs/computer-graphics/zh/nurbs_evolution_document.zh.md)** - 计算机图形学中曲线和曲面的数学模型
+
+### 🚀 GPU 加速计算
+- **[CUDA](./docs/gpu-computing/zh/cuda_evolution_document.zh.md)** - NVIDIA 的并行计算平台和编程模型
 
 ## 🌐 语言支持
 
@@ -188,7 +194,7 @@ docs/
 **📚 开始探索**: 从上面的[涵盖的库](#-涵盖的库)部分选择一个库，或浏览 `docs/` 目录结构。
 
 **🔍 快速导航**: 
-- [数据处理](./docs/data-processing/zh/) | [深度学习](./docs/deep-learning/zh/) | [机器学习](./docs/ml/zh/) | [自然语言处理](./docs/nlp/zh/) | [数据可视化](./docs/visualization/zh/) | [计算机图形学](./docs/computer-graphics/zh/)
+- [数据处理](./docs/data-processing/zh/) | [深度学习](./docs/deep-learning/zh/) | [机器学习](./docs/ml/zh/) | [自然语言处理](./docs/nlp/zh/) | [数据可视化](./docs/visualization/zh/) | [计算机图形学](./docs/computer-graphics/zh/) | [GPU 加速计算](./docs/gpu-computing/zh/)
 - [English Docs](./README.md) | [中文文档](./README.zh.md)
 
 **💡 需要帮助？** 查看 [CODEBUDDY.md](./CODEBUDDY.md) 了解详细的仓库指导和约定。
