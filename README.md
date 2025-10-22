@@ -22,6 +22,9 @@ This repository contains a curated collection of **Evolution Documents** that pr
 
 ```
 docs/
+├── computer-graphics/ # Geometric modeling and rendering
+│   ├── en/
+│   └── zh/
 ├── data-processing/     # Data manipulation and numerical computing
 │   ├── en/             # English documentation
 │   └── zh/             # Chinese documentation (中文文档)
@@ -69,6 +72,11 @@ docs/
 - **[Matplotlib](./docs/visualization/en/matplotlib_evolution_document.md)** - Foundational plotting library
 - **[Plotly](./docs/visualization/en/plotly_evolution_document.md)** - Interactive visualizations
 - **[Seaborn](./docs/visualization/en/seaborn_evolution_document.md)** - Statistical data visualization
+
+### 💻 Computer Graphics
+- **[G2 Blending Algorithm](./docs/computer-graphics/en/g2_blending_algorithm_evolution_document.md)** - Methods for G2 continuity in geometric modeling
+- **[Lie Algebra Method](./docs/computer-graphics/en/lie_algebra_method_evolution_document.md)** - Mathematical approach for continuous symmetries
+- **[NURBS](./docs/computer-graphics/en/nurbs_evolution_document.md)** - Mathematical model for curves and surfaces in computer graphics
 
 ## 🌐 Language Support
 
@@ -180,7 +188,7 @@ This project builds upon the incredible work of the Python scientific computing 
 **📚 Start exploring**: Choose a library from the [Covered Libraries](#-covered-libraries) section above, or browse the `docs/` directory structure.
 
 **🔍 Quick Navigation**: 
-- [Data Processing](./docs/data-processing/) | [Deep Learning](./docs/deep-learning/) | [Machine Learning](./docs/ml/) | [NLP](./docs/nlp/) | [Visualization](./docs/visualization/)
+- [Data Processing](./docs/data-processing/en/) | [Deep Learning](./docs/deep-learning/en/) | [Machine Learning](./docs/ml/en/) | [NLP](./docs/nlp/en/) | [Visualization](./docs/visualization/en/) | [Computer Graphics](./docs/computer-graphics/en/)
 - [English Docs](./README.md) | [中文文档](./README.zh.md)
 
 **💡 Need Help?** Check out [CODEBUDDY.md](./CODEBUDDY.md) for detailed repository guidance and conventions.
