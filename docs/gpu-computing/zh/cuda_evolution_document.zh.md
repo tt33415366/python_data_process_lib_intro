@@ -5,15 +5,26 @@
 NVIDIA CUDA（Compute Unified Device Architecture）是 NVIDIA 为其 GPU 开发的并行计算平台和编程模型。CUDA 于 2006 年首次推出，允许开发者使用 C、C++ 和 Fortran 编写在 NVIDIA GPU 上运行的程序。这标志着 GPU 从仅用于图形渲染到通用并行处理的重大转变。
 
 ### 重要里程碑：
-- **2006 年：** CUDA 1.0 发布，支持在 NVIDIA GPU 上进行通用计算。
-- **2007 年：** CUDA 1.1 推出，支持更多 GPU 架构。
-- **2008 年：** CUDA 2.0 带来了双精度浮点支持和原子操作。
-- **2010 年：** CUDA 3.0 引入了统一虚拟寻址并提高了性能。
-- **2012 年：** CUDA 5.0 增加了动态并行性，允许 GPU 线程启动新的内核。
-- **2014 年：** CUDA 6.0 引入了统一内存，简化了 CPU 和 GPU 之间的内存管理。
-- **2016 年：** CUDA 8.0 支持 Pascal 架构，并引入了 cuDNN 用于深度学习。
-- **2018 年：** CUDA 10.0 支持 Turing 架构，包括用于 AI 推理的 Tensor Cores。
-- **2020 年：** CUDA 11.0 引入了对 Ampere 架构的支持，包括第三代 Tensor Cores 和多实例 GPU (MIG)。
+
+```mermaid
+timeline
+    dateFormat  YYYY
+    title CUDA 演进时间线
+
+    section 基础
+    CUDA 1.0 : 2006
+    CUDA 2.0 (双精度) : 2008
+
+    section 扩展与易用性
+    CUDA 3.0 (统一虚拟寻址) : 2010
+    CUDA 5.0 (动态并行) : 2012
+    CUDA 6.0 (统一内存) : 2014
+
+    section 深度学习与专业化
+    CUDA 8.0 (Pascal & cuDNN) : 2016
+    CUDA 10.0 (Turing & Tensor Cores) : 2018
+    CUDA 11.0 (Ampere & MIG) : 2020
+```
 
 ## 2. 核心架构
 
@@ -36,8 +47,8 @@ CUDA 使用分层执行模型：
 
 ```mermaid
 graph TD
-    A[主机 (CPU)] --> B{启动内核};
-    B --> C[设备 (GPU)];
+    A["主机 (CPU)"] --> B{启动内核};
+    B --> C["设备 (GPU)"];
     C --> D[线程块网格];
     D --> E[线程块 1];
     D --> F[线程块 2];

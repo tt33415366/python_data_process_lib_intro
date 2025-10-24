@@ -36,8 +36,8 @@ CUDA uses a hierarchical execution model:
 
 ```mermaid
 graph TD
-    A[Host (CPU)] --> B{Launch Kernel};
-    B --> C[Device (GPU)];
+    A["Host (CPU)"] --> B{Launch Kernel};
+    B --> C["Device (GPU)"];
     C --> D[Grid of Blocks];
     D --> E[Block 1];
     D --> F[Block 2];
