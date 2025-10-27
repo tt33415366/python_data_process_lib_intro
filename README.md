@@ -62,6 +62,7 @@ docs/
 - **[Transformer](./docs/deep-learning/en/transformer_evolution_document.md)** - Attention-based models for sequence processing
 - **[The Annotated Transformer](./docs/deep-learning/en/the_annotated_transformer.md)** - An annotated implementation of the Transformer model
 - **[RF-DETR](./docs/deep-learning/en/rf_detr_evolution_document.md)** - Real-time Detection and Segmentation Model
+- **[RF-DETR Seg (Preview)](./docs/deep-learning/en/rf_detr_seg_preview_evolution_document.md)** - Real-time Detection and Segmentation Model (Preview)
 
 ### 🤖 Machine Learning
 - **[Scikit-learn](./docs/ml/en/scikit-learn_evolution_document.md)** - General-purpose machine learning
