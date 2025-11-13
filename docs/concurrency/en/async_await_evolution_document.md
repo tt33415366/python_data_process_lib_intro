@@ -417,12 +417,88 @@ Finished main_semaphore
     *   `async with semaphore:`: Context manager for acquiring and releasing the semaphore.
 *   **Returns:** An `asyncio.Semaphore` object.
 
-##### 3.3.3. Quick Reference: Synchronization Primitives
+##### 3.3.3. Queues
+
+**`asyncio.Queue`**
+
+**Goal:** Implement producer-consumer patterns and safely exchange data between concurrently running tasks.
+
+**Code:**
+```python
+import asyncio
+import random
+
+async def producer(queue, num_items):
+    for i in range(num_items):
+        item = f"item-{i}"
+        await asyncio.sleep(random.uniform(0.1, 0.5)) # Simulate work
+        await queue.put(item)
+        print(f"Producer: Put {item} into queue")
+    await queue.put(None) # Sentinel to signal consumer to stop
+
+async def consumer(queue, consumer_id):
+    while True:
+        item = await queue.get()
+        if item is None:
+            queue.task_done()
+            break
+        print(f"Consumer {consumer_id}: Got {item} from queue")
+        await asyncio.sleep(random.uniform(0.2, 0.6)) # Simulate work
+        queue.task_done()
+    print(f"Consumer {consumer_id}: Finished")
+
+async def main_queue():
+    print("Starting main_queue")
+    queue = asyncio.Queue()
+    
+    producer_task = asyncio.create_task(producer(queue, 5))
+    consumer_tasks = [asyncio.create_task(consumer(queue, i)) for i in range(2)]
+
+    await asyncio.gather(producer_task, *consumer_tasks)
+    await queue.join() # Wait until all items in the queue have been processed
+    print("Finished main_queue")
+
+if __name__ == "__main__":
+    asyncio.run(main_queue())
+```
+
+**Expected Output (order of producer/consumer actions may vary due to concurrency):**
+```
+Starting main_queue
+Producer: Put item-0 into queue
+Consumer 0: Got item-0 from queue
+Producer: Put item-1 into queue
+Consumer 1: Got item-1 from queue
+Producer: Put item-2 into queue
+Consumer 0: Got item-2 from queue
+Producer: Put item-3 into queue
+Consumer 1: Got item-3 from queue
+Producer: Put item-4 into queue
+Consumer 0: Got item-4 from queue
+Producer: Put None into queue
+Consumer 0: Finished
+Consumer 1: Got None from queue
+Consumer 1: Finished
+Finished main_queue
+```
+
+**Explanation:** `asyncio.Queue` is a powerful tool for inter-task communication, enabling classic producer-consumer patterns. Producers put items into the queue, and consumers get items from it. The queue handles the synchronization, allowing tasks to safely exchange data without explicit locks. `queue.join()` waits until all items previously put into the queue have been received and processed (i.e., `task_done()` has been called for each).
+
+*   **Context:** A first-in, first-out (FIFO) queue designed for use with `async/await` to safely exchange data between multiple concurrent tasks.
+*   **Methods:**
+    *   `put(item)`: A coroutine that puts an item into the queue.
+    *   `get()`: A coroutine that removes and returns an item from the queue. If the queue is empty, it waits until an item is available.
+    *   `task_done()`: Indicates that a formerly enqueued task is complete. Used with `join()`.
+    *   `join()`: A coroutine that blocks until all items in the queue have been received and `task_done()` has been called for each.
+*   **Returns:** An `asyncio.Queue` object.
+
+##### 3.3.4. Quick Reference: Synchronization Primitives
 
 | Primitive | Description | When to Use |
 | :--- | :--- | :--- |
 | `asyncio.Lock` | Mutual exclusion lock | Protecting shared mutable state from race conditions. |
 | `asyncio.Semaphore` | Bounded counter | Limiting the number of concurrent tasks accessing a resource or performing an operation. |
+| `asyncio.Queue` | Producer-consumer queue | Safely exchanging data between tasks; implementing producer-consumer patterns. |
 
 #### 3.4. Running Blocking Code in a Thread Pool
 
@@ -505,7 +581,8 @@ graph TD
 
     D --> D1("asyncio.Lock")
     D --> D2("asyncio.Semaphore")
-    D --> D3("asyncio.Event, asyncio.Condition, asyncio.Queue")
+    D --> D3("asyncio.Event, asyncio.Condition")
+    D --> D4("asyncio.Queue")
 
     E --> E1("asyncio.sleep()")
     E --> E2("asyncio.to_thread() (Python 3.9+)")

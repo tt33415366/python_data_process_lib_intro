@@ -417,12 +417,88 @@ Finished main_semaphore
     *   `async with semaphore:`：用于获取和释放信号量的上下文管理器。
 *   **返回：：** 一个 `asyncio.Semaphore` 对象。
 
-##### 3.3.3. 快速参考：同步原语
+##### 3.3.3. 队列
+
+**`asyncio.Queue`**
+
+**目标：** 实现生产者-消费者模式，并安全地在并发运行的任务之间交换数据。
+
+**代码：**
+```python
+import asyncio
+import random
+
+async def producer(queue, num_items):
+    for i in range(num_items):
+        item = f"item-{i}"
+        await asyncio.sleep(random.uniform(0.1, 0.5)) # 模拟工作
+        await queue.put(item)
+        print(f"Producer: Put {item} into queue")
+    await queue.put(None) # 发送哨兵值以指示消费者停止
+
+async def consumer(queue, consumer_id):
+    while True:
+        item = await queue.get()
+        if item is None:
+            queue.task_done()
+            break
+        print(f"Consumer {consumer_id}: Got {item} from queue")
+        await asyncio.sleep(random.uniform(0.2, 0.6)) # 模拟工作
+        queue.task_done()
+    print(f"Consumer {consumer_id}: Finished")
+
+async def main_queue():
+    print("Starting main_queue")
+    queue = asyncio.Queue()
+    
+    producer_task = asyncio.create_task(producer(queue, 5))
+    consumer_tasks = [asyncio.create_task(consumer(queue, i)) for i in range(2)]
+
+    await asyncio.gather(producer_task, *consumer_tasks)
+    await queue.join() # 等待队列中的所有项目都被处理完毕
+    print("Finished main_queue")
+
+if __name__ == "__main__":
+    asyncio.run(main_queue())
+```
+
+**预期输出（生产者/消费者操作的顺序可能因并发而异）：**
+```
+Starting main_queue
+Producer: Put item-0 into queue
+Consumer 0: Got item-0 from queue
+Producer: Put item-1 into queue
+Consumer 1: Got item-1 from queue
+Producer: Put item-2 into queue
+Consumer 0: Got item-2 from queue
+Producer: Put item-3 into queue
+Consumer 1: Got item-3 from queue
+Producer: Put item-4 into queue
+Consumer 0: Got item-4 from queue
+Producer: Put None into queue
+Consumer 0: Finished
+Consumer 1: Got None from queue
+Consumer 1: Finished
+Finished main_queue
+```
+
+**解释：** `asyncio.Queue` 是一个强大的任务间通信工具，支持经典的生产者-消费者模式。生产者将项目放入队列，消费者从中获取项目。队列处理同步，允许任务安全地交换数据而无需显式锁。`queue.join()` 会一直等待，直到队列中所有先前放入的项目都被接收并处理（即，每个项目都调用了 `task_done()`）。
+
+*   **上下文：** 一个先进先出 (FIFO) 队列，专为 `async/await` 设计，用于在多个并发任务之间安全地交换数据。
+*   **方法：**
+    *   `put(item)`：一个协程，将项目放入队列。
+    *   `get()`：一个协程，从队列中移除并返回一个项目。如果队列为空，它会一直等待直到有项目可用。
+    *   `task_done()`：指示先前入队的一个任务已完成。与 `join()` 一起使用。
+    *   `join()`：一个协程，阻塞直到队列中所有项目都被接收并为每个项目调用了 `task_done()`。
+*   **返回：：** 一个 `asyncio.Queue` 对象。
+
+##### 3.3.4. 快速参考：同步原语
 
 | 原语 | 描述 | 何时使用 |
 | :--- | :--- | :--- |
 | `asyncio.Lock` | 互斥锁 | 保护共享可变状态免受竞态条件影响。 |
 | `asyncio.Semaphore` | 有界计数器 | 限制并发任务访问资源或执行操作的数量。 |
+| `asyncio.Queue` | 生产者-消费者队列 | 安全地在任务之间交换数据；实现生产者-消费者模式。 |
 
 #### 3.4. 在线程池中运行阻塞代码
 
@@ -505,7 +581,8 @@ graph TD
 
     D --> D1("asyncio.Lock")
     D --> D2("asyncio.Semaphore")
-    D --> D3("asyncio.Event, asyncio.Condition, asyncio.Queue")
+    D --> D3("asyncio.Event, asyncio.Condition")
+    D --> D4("asyncio.Queue")
 
     E --> E1("asyncio.sleep()")
     E --> E2("asyncio.to_thread() (Python 3.9+)")
