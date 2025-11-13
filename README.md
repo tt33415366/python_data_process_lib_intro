@@ -86,6 +86,9 @@ docs/
 ### 🚀 GPU Computing
 - **[CUDA](./docs/gpu-computing/en/cuda_evolution_document.md)** - NVIDIA's parallel computing platform and programming model
 
+### ⚡ Concurrency
+- **[Async/Await](./docs/concurrency/en/async_await_evolution_document.md)** - Asynchronous programming pattern in Python
+
 ## 🌐 Language Support
 
 All documentation is available in both **English** and **Chinese (中文)**:
@@ -196,7 +199,7 @@ This project builds upon the incredible work of the Python scientific computing 
 **📚 Start exploring**: Choose a library from the [Covered Libraries](#-covered-libraries) section above, or browse the `docs/` directory structure.
 
 **🔍 Quick Navigation**: 
-- [Data Processing](./docs/data-processing/en/) | [Deep Learning](./docs/deep-learning/en/) | [Machine Learning](./docs/ml/en/) | [NLP](./docs/nlp/en/) | [Visualization](./docs/visualization/en/) | [Computer Graphics](./docs/computer-graphics/en/) | [GPU Computing](./docs/gpu-computing/en/)
+- [Data Processing](./docs/data-processing/en/) | [Deep Learning](./docs/deep-learning/en/) | [Machine Learning](./docs/ml/en/) | [NLP](./docs/nlp/en/) | [Visualization](./docs/visualization/en/) | [Computer Graphics](./docs/computer-graphics/en/) | [GPU Computing](./docs/gpu-computing/en/) | [Concurrency](./docs/concurrency/en/)
 - [English Docs](./README.md) | [中文文档](./README.zh.md)
 
 **💡 Need Help?** Check out [CODEBUDDY.md](./CODEBUDDY.md) for detailed repository guidance and conventions.
