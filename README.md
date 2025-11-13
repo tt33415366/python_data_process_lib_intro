@@ -28,6 +28,9 @@ docs/
 ├── gpu-computing/     # GPU-accelerated computing
 │   ├── en/
 │   └── zh/
+├── concurrency/       # Asynchronous programming patterns
+│   ├── en/
+│   └── zh/
 ├── data-processing/     # Data manipulation and numerical computing
 │   ├── en/             # English documentation
 │   └── zh/             # Chinese documentation (中文文档)

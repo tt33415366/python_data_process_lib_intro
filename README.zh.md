@@ -28,6 +28,9 @@ docs/
 ├── gpu-computing/     # GPU 加速计算
 │   ├── en/
 │   └── zh/
+├── concurrency/       # 异步编程模式
+│   ├── en/
+│   └── zh/
 ├── data-processing/     # 数据处理和数值计算
 │   ├── en/             # 英文文档
 │   └── zh/             # 中文文档
