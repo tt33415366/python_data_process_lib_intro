@@ -66,7 +66,7 @@ docs/
 - **[图解 Transformer](./docs/deep-learning/zh/the_annotated_transformer.zh.md)** - Transformer 模型的带注释实现
 - **[RF-DETR](./docs/deep-learning/zh/rf_detr_evolution_document.zh.md)** - 实时检测与分割模型
 - **[RF-DETR Seg (预览版)](./docs/deep-learning/zh/rf_detr_seg_preview_evolution_document.zh.md)** - 实时检测与分割模型 (预览版)
-- **[马尔可夫链](./docs/deep-learning/zh/markov_chain_evolution_document.zh.md)** - 序列事件的概率模型
+- **[马尔可夫链](./docs/deep-learning/zh/markov_chain_evolution_document.zh.md)** - 不确定性下序列决策的数学框架
 
 ### 🤖 机器学习
 - **[Scikit-learn](./docs/ml/zh/scikit-learn_evolution_document.zh.md)** - 通用机器学习

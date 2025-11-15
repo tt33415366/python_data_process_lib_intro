@@ -66,7 +66,7 @@ docs/
 - **[The Annotated Transformer](./docs/deep-learning/en/the_annotated_transformer.md)** - An annotated implementation of the Transformer model
 - **[RF-DETR](./docs/deep-learning/en/rf_detr_evolution_document.md)** - Real-time Detection and Segmentation Model
 - **[RF-DETR Seg (Preview)](./docs/deep-learning/en/rf_detr_seg_preview_evolution_document.md)** - Real-time Detection and Segmentation Model (Preview)
-- **[Markov Chain](./docs/deep-learning/en/markov_chain_evolution_document.md)** - Probabilistic model for sequential events
+- **[Markov Chain](./docs/deep-learning/en/markov_chain_evolution_document.md)** - Mathematical framework for sequential decision-making under uncertainty
 
 ### 🤖 Machine Learning
 - **[Scikit-learn](./docs/ml/en/scikit-learn_evolution_document.md)** - General-purpose machine learning
