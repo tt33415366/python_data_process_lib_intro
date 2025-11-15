@@ -45,7 +45,7 @@ Imagine you're trying to navigate a maze. For every intersection (state) in the 
 
 The heart of Q-learning is how it updates its Q-values based on experience. The agent interacts with the environment, taking an action `a` in state `s`, observing a reward `r`, and transitioning to a new state `s'`.
 
-`Q(s, a) ← Q(s, a) + α [r + γ max_{a'} Q(s', a') - Q(s, a)]`
+$Q(s, a) \leftarrow Q(s, a) + \alpha [r + \gamma \max_{a'} Q(s', a') - Q(s, a)]$
 
 *   **`Q(s, a)`:** The current estimated Q-value for the state-action pair.
 *   **`α` (Learning Rate):** A value between 0 and 1 that determines how much new information overrides old information. A high `α` means the agent learns quickly but might be unstable; a low `α` means slower but more stable learning.

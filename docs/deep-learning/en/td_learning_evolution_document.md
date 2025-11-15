@@ -44,7 +44,9 @@ Imagine you're trying to predict the final score of a basketball game while it's
 
 *   **TD Error:** The difference between the estimated value of the current state and the estimated value of the next state, plus the immediate reward. It quantifies how "surprised" the agent is by the actual outcome compared to its expectation.
 
-    `TD Error = r + γ V(s') - V(s)`
+$
+\text{TD Error} = r + \gamma V(s') - V(s)
+$
 
     *   `r`: Immediate reward received.
     *   `γ`: Discount factor.
@@ -55,7 +57,9 @@ Imagine you're trying to predict the final score of a basketball game while it's
 
 The general TD update rule for a state-value function `V(s)` is:
 
-`V(s) ← V(s) + α [r + γ V(s') - V(s)]`
+$
+V(s) \leftarrow V(s) + \alpha [r + \gamma V(s') - V(s)]
+$
 
 *   **`V(s)`:** The current estimated value of state `s`.
 *   **`α` (Learning Rate):** Determines the step size for updates.
@@ -85,7 +89,7 @@ While the basic TD update is for *prediction* (learning `V(s)`), it can be exten
 **Goal:** Learn an optimal policy by updating the Q-value for the *actual* action taken in the next state.
 
 **Update Rule:**
-`Q(s, a) ← Q(s, a) + α [r + γ Q(s', a') - Q(s, a)]`
+$Q(s, a) \leftarrow Q(s, a) + \alpha [r + \gamma Q(s', a') - Q(s, a)]$
 
 *   **Key Difference from Q-learning:** SARSA is an *on-policy* algorithm. It updates `Q(s, a)` based on the action `a'` that is *actually chosen* in the next state `s'` (following the current policy). This means SARSA learns the value of the policy it is currently following, including its exploration strategy.
 
@@ -94,7 +98,9 @@ While the basic TD update is for *prediction* (learning `V(s)`), it can be exten
 **Goal:** Learn an optimal policy by updating the Q-value for the *best possible* action in the next state.
 
 **Update Rule:**
-`Q(s, a) ← Q(s, a) + α [r + γ max_{a'} Q(s', a') - Q(s, a)]`
+$
+Q(s, a) \leftarrow Q(s, a) + \alpha [r + \gamma \max_{a'} Q(s', a') - Q(s, a)]
+$
 
 *   **Key Difference from SARSA:** Q-learning is an *off-policy* algorithm. It updates `Q(s, a)` based on the `max` Q-value for the next state `s'`, regardless of the action `a'` that was actually taken. This allows Q-learning to learn the optimal policy even while the agent is exploring sub-optimal actions.
 

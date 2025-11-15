@@ -45,7 +45,9 @@ Imagine you're planning a road trip. For each city you could visit (state), you 
 
 This equation describes the value function for a *given* policy `π`. It averages over all possible actions prescribed by the policy and all possible next states.
 
-`Vπ(s) = Σ_a π(a|s) Σ_{s'} P(s'|s, a) [R(s, a, s') + γVπ(s')]`
+$
+V^\pi(s) = \sum_a \pi(a|s) \sum_{s'} P(s'|s, a) [R(s, a, s') + \gamma V^\pi(s')]
+$
 
 *   **`Vπ(s)`:** The value of state `s` under policy `π`.
 *   **`π(a|s)`:** The probability of taking action `a` in state `s` under policy `π`.
@@ -59,11 +61,15 @@ This equation is used in **policy evaluation**, where we want to determine how g
 
 This equation describes the value function for the *optimal* policy `π*`. Instead of averaging over actions, it takes the maximum over all possible actions, effectively choosing the best action at each step.
 
-`V*(s) = max_a Σ_{s'} P(s'|s, a) [R(s, a, s') + γV*(s')]`
+$
+V^*(s) = \max_a \sum_{s'} P(s'|s, a) [R(s, a, s') + \gamma V^*(s')]
+$
 
 And for the optimal action-value function:
 
-`Q*(s, a) = Σ_{s'} P(s'|s, a) [R(s, a, s') + γ max_{a'} Q*(s', a')]`
+$
+Q^*(s, a) = \sum_{s'} P(s'|s, a) [R(s, a, s') + \gamma \max_{a'} Q^*(s', a')]
+$
 
 *   **`V*(s)`:** The optimal value of state `s`.
 *   **`Q*(s, a)`:** The optimal value of taking action `a` in state `s`.
@@ -100,7 +106,7 @@ The Bellman equations are solved iteratively to find the optimal value functions
 
 **Process:**
 1.  Initialize `V(s)` arbitrarily for all `s` (e.g., to zeros).
-2.  Repeatedly update `V(s)` using: `V_{k+1}(s) = max_a Σ_{s'} P(s'|s, a) [R(s, a, s') + γV_k(s')]`
+2.  Repeatedly update `V(s)` using: $V_{k+1}(s) = \max_a \sum_{s'} P(s'|s, a) [R(s, a, s') + \gamma V_k(s')]$
 3.  Continue until `V(s)` converges.
 
 #### 3.2. Policy Iteration
@@ -109,7 +115,9 @@ The Bellman equations are solved iteratively to find the optimal value functions
 
 **Process:**
 1.  **Policy Evaluation:** Given a policy `π`, compute `Vπ(s)` using the Bellman expectation equation (often by solving a system of linear equations or iterative updates).
-2.  **Policy Improvement:** Update the policy `π` by choosing actions greedily with respect to `Vπ(s)`: `π'(s) = argmax_a Σ_{s'} P(s'|s, a) [R(s, a, s') + γVπ(s')]`.
+2.  **Policy Improvement:** Update the policy `π` by choosing actions greedily with respect to `Vπ(s)`: $ 
+\pi'(s) = \underset{a}{\operatorname{argmax}} \sum_{s'} P(s'|s, a) [R(s, a, s') + \gamma V^\pi(s')]
+$.
 3.  Repeat steps 1 and 2 until the policy no longer improves.
 
 ### 3.3. Quick Reference: Bellman Equation Applications (Conceptual)
