@@ -70,6 +70,7 @@ docs/
 - **[Reinforcement Learning](./docs/deep-learning/en/reinforcement_learning_evolution_document.md)** - Algorithms and theory for agents learning optimal behavior through interaction
 - **[Q-learning](./docs/deep-learning/en/q_learning_evolution_document.md)** - Model-free reinforcement learning algorithm for optimal policy learning
 - **[TD-learning](./docs/deep-learning/en/td_learning_evolution_document.md)** - Temporal Difference learning methods for value estimation
+- **[Bellman Equation](./docs/deep-learning/en/bellman_equation_evolution_document.md)** - Fundamental equation in dynamic programming and reinforcement learning
 
 ### 🤖 Machine Learning
 - **[Scikit-learn](./docs/ml/en/scikit-learn_evolution_document.md)** - General-purpose machine learning

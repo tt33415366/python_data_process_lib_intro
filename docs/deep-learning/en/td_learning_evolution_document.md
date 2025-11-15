@@ -70,10 +70,10 @@ This update rule is applied after each step of interaction with the environment,
 graph TD
     A[Agent in State s] --> B{Take Action a}
     B --> C[Observe Reward r, New State s']
-    C --> D[Estimate V(s')]
-    D --> E[Calculate TD Target: r + γ * V(s')]
-    E --> F[Calculate TD Error: TD Target - V(s)]
-    F --> G[Update V(s) using Learning Rate α]
+    C --> D["Estimate V(s')"]
+    D --> E["Calculate TD Target: r + γ * V(s')"]
+    E --> F["Calculate TD Error: TD Target - V(s)"]
+    F --> G["Update V(s) using Learning Rate α"]
 ```
 
 ### 3. Key TD Control Algorithms
