@@ -26,6 +26,8 @@ timeline
     Policy Gradient Methods (A3C, TRPO) : 2016, 2016
     Proximal Policy Optimization (PPO) : 2017, 2017
     Soft Actor-Critic (SAC) : 2018, 2018
+    Offline RL            : 2020, ongoing
+    Decision Transformer  : 2021, ongoing
 ```
 
 ### 2. Core Architecture
@@ -207,6 +209,20 @@ Different RL algorithms have different trade-offs in terms of sample efficiency,
     *   **Pros:** Can be much more sample-efficient.
     *   **Cons:** The performance is limited by the accuracy of the learned model.
 
+#### 4.3. Emerging Paradigms in RL
+
+Recent years have seen the rise of new approaches that are reshaping the RL landscape.
+
+*   **Offline Reinforcement Learning:** This paradigm focuses on learning policies from large, pre-collected datasets of environment interactions, without any active exploration.
+    *   **Pros:** Enables RL in domains where live interaction is expensive, dangerous, or impractical (e.g., healthcare, autonomous driving). It leverages existing data to learn policies.
+    *   **Cons:** Faces challenges with "distributional shift," where the learned policy might behave poorly because it encounters states not well-represented in the static dataset.
+*   **RL as a Sequence Modeling Problem (Decision Transformers):** This approach reframes RL as a conditional sequence modeling task. Instead of learning a policy or value function, a Transformer-based model is trained on trajectories (sequences of states, actions, and rewards) to predict future actions that achieve a desired return.
+    *   **Pros:** Leverages the power and scalability of the Transformer architecture. It can solve RL problems using supervised learning techniques, which are often more stable and well-understood.
+    *   **Cons:** May not be as sample-efficient as traditional model-free methods in online settings.
+*   **Large-Scale Generalist Agents:** Inspired by foundation models in NLP and vision, this trend focuses on training large, multi-task models on a vast and diverse range of data. These "generalist agents" (e.g., DeepMind's Gato) can be prompted to perform a wide variety of tasks without task-specific fine-tuning.
+    *   **Pros:** Aims to create a single, versatile agent that can adapt to new tasks on the fly, a key step towards artificial general intelligence.
+    *   **Cons:** Requires massive computational resources and data. The generalization capabilities are still an active area of research.
+
 ### 5. Practical Applications & Use Cases
 
 RL has been successfully applied to a wide range of complex decision-making problems.
@@ -260,6 +276,7 @@ The evolution of RL has been marked by a shift from tabular methods on small, di
 *   **Algorithmic Innovations:** The development of more stable and sample-efficient algorithms like PPO and SAC has made RL more practical and accessible.
 *   **Standardization and Libraries:** The creation of standardized environments (Gym/Gymnasium) and easy-to-use libraries (Stable Baselines3, RLlib) has democratized RL and accelerated research.
 *   **From Simulation to the Real World:** A major focus of current research is on bridging the "sim-to-real" gap, enabling policies trained in simulation to be effectively deployed on real-world robots and systems.
+*   **New Paradigms:** The field is currently undergoing another shift, with the rise of **Offline RL** making it possible to learn from static datasets, and architectures like the **Decision Transformer** reframing RL as a sequence modeling problem. This convergence with other areas of deep learning is paving the way for large-scale, **generalist agents** that can perform a wide variety of tasks.
 
 ### 8. Conclusion
 
