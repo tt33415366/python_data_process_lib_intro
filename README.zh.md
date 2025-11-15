@@ -67,6 +67,9 @@ docs/
 - **[RF-DETR](./docs/deep-learning/zh/rf_detr_evolution_document.zh.md)** - 实时检测与分割模型
 - **[RF-DETR Seg (预览版)](./docs/deep-learning/zh/rf_detr_seg_preview_evolution_document.zh.md)** - 实时检测与分割模型 (预览版)
 - **[马尔可夫链](./docs/deep-learning/zh/markov_chain_evolution_document.zh.md)** - 不确定性下序列决策的数学框架
+- **[Reinforcement Learning](./docs/deep-learning/zh/reinforcement_learning_evolution_document.zh.md)** - 通过交互学习最优行为的智能体算法和理论
+- **[Q-learning](./docs/deep-learning/zh/q_learning_evolution_document.zh.md)** - 用于最优策略学习的无模型强化学习算法
+- **[TD-learning](./docs/deep-learning/zh/td_learning_evolution_document.zh.md)** - 用于价值估计的时序差分学习方法
 
 ### 🤖 机器学习
 - **[Scikit-learn](./docs/ml/zh/scikit-learn_evolution_document.zh.md)** - 通用机器学习

@@ -67,6 +67,9 @@ docs/
 - **[RF-DETR](./docs/deep-learning/en/rf_detr_evolution_document.md)** - Real-time Detection and Segmentation Model
 - **[RF-DETR Seg (Preview)](./docs/deep-learning/en/rf_detr_seg_preview_evolution_document.md)** - Real-time Detection and Segmentation Model (Preview)
 - **[Markov Chain](./docs/deep-learning/en/markov_chain_evolution_document.md)** - Mathematical framework for sequential decision-making under uncertainty
+- **[Reinforcement Learning](./docs/deep-learning/en/reinforcement_learning_evolution_document.md)** - Algorithms and theory for agents learning optimal behavior through interaction
+- **[Q-learning](./docs/deep-learning/en/q_learning_evolution_document.md)** - Model-free reinforcement learning algorithm for optimal policy learning
+- **[TD-learning](./docs/deep-learning/en/td_learning_evolution_document.md)** - Temporal Difference learning methods for value estimation
 
 ### 🤖 Machine Learning
 - **[Scikit-learn](./docs/ml/en/scikit-learn_evolution_document.md)** - General-purpose machine learning
@@ -202,7 +205,7 @@ This project builds upon the incredible work of the Python scientific computing 
 
 **📚 Start exploring**: Choose a library from the [Covered Libraries](#-covered-libraries) section above, or browse the `docs/` directory structure.
 
-**🔍 Quick Navigation**: 
+**🔍 Quick Navigation**:
 - [Data Processing](./docs/data-processing/en/) | [Deep Learning](./docs/deep-learning/en/) | [Machine Learning](./docs/ml/en/) | [NLP](./docs/nlp/en/) | [Visualization](./docs/visualization/en/) | [Computer Graphics](./docs/computer-graphics/en/) | [GPU Computing](./docs/gpu-computing/en/) | [Concurrency](./docs/concurrency/en/)
 - [English Docs](./README.md) | [中文文档](./README.zh.md)
 
