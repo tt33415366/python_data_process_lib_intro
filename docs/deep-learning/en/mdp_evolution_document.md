@@ -27,6 +27,17 @@ timeline
 
 ### 2. Core Components of an MDP
 
+**Mental Model / Analogy:**
+Imagine playing a board game like Snakes and Ladders.
+*   **Agent:** You are the agent.
+*   **State (S):** Your position on the board is the current state.
+*   **Action (A):** The action is rolling the die.
+*   **Transition (P):** The rules of the game and the random die roll determine the probability of moving to the next state. If you land on a ladder, you transition to a better state; if you land on a snake, you transition to a worse one.
+*   **Reward (R):** You might get a small negative reward for each move (to encourage finishing quickly) and a large positive reward for reaching the final square.
+*   **Policy (π):** In a simple game like this, your policy is fixed (you always roll the die). In a more complex game like chess, your policy would be the strategy you use to decide which piece to move.
+
+An MDP is the formal mathematical framework for describing this kind of game. Reinforcement learning is the process of learning the best strategy or policy to win the game, even if you don't initially know all the rules or the exact layout of the snakes and ladders.
+
 An MDP is formally defined as a tuple `(S, A, P, R, γ)`.
 
 *   **S (States):** A finite set of possible states. The state represents a complete description of the world at a particular time. For example, in a chess game, the state is the position of all pieces on the board.
