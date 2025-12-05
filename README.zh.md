@@ -56,6 +56,7 @@ docs/
 - **[Pandas](./docs/data-processing/zh/pandas_evolution_document.zh.md)** - 数据处理和分析
 - **[SciPy](./docs/data-processing/zh/scipy_evolution_document.zh.md)** - 科学计算算法
 - **[Dask](./docs/data-processing/zh/dask_evolution_document.zh.md)** - 并行计算和大数据
+- **[RMSE 和 R 平方](./docs/data-processing/zh/rmse_r_squared_evolution_document.zh.md)** - 回归模型评估指标
 
 ### 🧠 深度学习框架
 - **[PyTorch](./docs/deep-learning/zh/pytorch_evolution_document.zh.md)** - 动态神经网络和研究

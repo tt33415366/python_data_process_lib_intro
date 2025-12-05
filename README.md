@@ -56,6 +56,7 @@ docs/
 - **[Pandas](./docs/data-processing/en/pandas_evolution_document.md)** - Data manipulation and analysis
 - **[SciPy](./docs/data-processing/en/scipy_evolution_document.md)** - Scientific computing algorithms
 - **[Dask](./docs/data-processing/en/dask_evolution_document.md)** - Parallel computing and big data
+- **[RMSE and R-squared](./docs/data-processing/en/rmse_r_squared_evolution_document.md)** - Metrics for evaluating regression models
 
 ### 🧠 Deep Learning Frameworks
 - **[PyTorch](./docs/deep-learning/en/pytorch_evolution_document.md)** - Dynamic neural networks and research
