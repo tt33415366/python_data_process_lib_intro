@@ -64,6 +64,7 @@ docs/
 - **[Keras](./docs/deep-learning/en/keras_evolution_document.md)** - High-level neural network API
 - **[CNN](./docs/deep-learning/en/cnn_evolution_document.md)** - Convolutional Neural Networks for computer vision
 - **[Transformer](./docs/deep-learning/en/transformer_evolution_document.md)** - Attention-based models for sequence processing
+- **[Residual Connection](./docs/deep-learning/en/residual_connection_evolution_document.md)** - Fundamental skip connection architecture for deep networks
 - **[The Annotated Transformer](./docs/deep-learning/en/the_annotated_transformer.md)** - An annotated implementation of the Transformer model
 - **[RF-DETR](./docs/deep-learning/en/rf_detr_evolution_document.md)** - Real-time Detection and Segmentation Model
 - **[RF-DETR Seg (Preview)](./docs/deep-learning/en/rf_detr_seg_preview_evolution_document.md)** - Real-time Detection and Segmentation Model (Preview)
