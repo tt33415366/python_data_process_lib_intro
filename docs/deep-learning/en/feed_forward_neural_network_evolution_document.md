@@ -65,10 +65,14 @@ The output layer is the "final reporting department." After all the processing i
 
 *   **Purpose:** Introduce non-linearity into the network, allowing it to learn complex patterns and relationships that linear models cannot. Without activation functions, a multi-layer network would behave like a single-layer linear model.
 *   **Common Examples:**
-    *   **ReLU (Rectified Linear Unit):** `f(x) = max(0, x)`. Popular due to its computational efficiency and ability to mitigate the vanishing gradient problem.
-    *   **Sigmoid:** `f(x) = 1 / (1 + e^(-x))`. Squashes output between 0 and 1, often used in output layers for binary classification.
-    *   **Tanh (Hyperbolic Tangent):** `f(x) = (e^x - e^-x) / (e^x + e^-x)`. Squashes output between -1 and 1.
-    *   **Softmax:** Used in the output layer for multi-class classification, converting raw scores (logits) into probabilities that sum to 1.
+    *   **ReLU (Rectified Linear Unit):** `f(x) = max(0, x)`.
+    *   **Use Case:** Most commonly used in hidden layers of deep networks due to its computational efficiency and its ability to alleviate the vanishing gradient problem.
+    *   **Sigmoid:** `f(x) = 1 / (1 + e^(-x))`.
+    *   **Use Case:** Outputs values between 0 and 1, making it suitable for binary classification problems in the output layer (interpreting the output as a probability) or for hidden layers in simpler, shallower networks.
+    *   **Tanh (Hyperbolic Tangent):** `f(x) = (e^x - e^-x) / (e^x + e^-x)`.
+    *   **Use Case:** Outputs values between -1 and 1, often preferred over Sigmoid in hidden layers because its output is zero-centered, which can aid in training dynamics.
+    *   **Softmax:** Converts a vector of arbitrary real values into a probability distribution. For an input vector `z` of `K` dimensions, the softmax function is `P(y=j|z) = e^(z_j) / sum(e^(z_k) for k in 1 to K)`.
+    *   **Use Case:** Exclusively used in the output layer for multi-class classification, where it assigns probabilities to each class that sum up to 1.
 
 **Mermaid Diagram: FFNN Core Architecture**
 
@@ -96,9 +100,14 @@ These are the fundamental building blocks for FFNNs, representing the fully conn
 from tensorflow.keras import layers, models
 
 model = models.Sequential([
-    layers.Dense(64, activation='relu', input_shape=(784,)), # Input layer + first hidden layer
-    layers.Dense(64, activation='relu'), # Second hidden layer
-    layers.Dense(10, activation='softmax') # Output layer for 10 classes
+    # The first Dense layer. It takes an input of shape (784,) for flattened MNIST images
+    # and has 64 neurons. 'relu' is the activation function.
+    layers.Dense(64, activation='relu', input_shape=(784,)), 
+    # A second hidden Dense layer with 64 neurons and ReLU activation.
+    layers.Dense(64, activation='relu'), 
+    # The output Dense layer for a 10-class classification problem (e.g., MNIST digits).
+    # 'softmax' activation ensures the outputs are probabilities summing to 1.
+    layers.Dense(10, activation='softmax') 
 ])
 
 model.summary()
@@ -137,8 +146,11 @@ These are often specified as an argument within a `Dense` layer or as separate l
 from tensorflow.keras import layers, models
 
 model = models.Sequential([
+    # A Dense layer without an activation function specified directly.
     layers.Dense(64, input_shape=(784,)),
-    layers.ReLU(), # Explicit ReLU activation layer
+    # An explicit ReLU activation layer applied after the Dense layer's linear transformation.
+    layers.ReLU(), 
+    # The output layer with softmax activation.
     layers.Dense(10, activation='softmax')
 ])
 ```
@@ -156,9 +168,14 @@ model = models.Sequential([
 from tensorflow.keras import layers, models
 
 model = models.Sequential([
+    # A hidden Dense layer with ReLU activation.
     layers.Dense(64, activation='relu', input_shape=(784,)),
-    layers.Dense(10), # No activation here
-    layers.Softmax() # Explicit Softmax activation layer for output
+    # An output Dense layer with 10 units (for 10 classes) but no activation specified here,
+    # as softmax will be applied separately.
+    layers.Dense(10), 
+    # An explicit Softmax activation layer, converting the raw outputs (logits) 
+    # from the previous Dense layer into a probability distribution.
+    layers.Softmax() 
 ])
 ```
 
@@ -207,23 +224,46 @@ mindmap
       (Metrics)
 ```
 
+#### 3.4. Loss Functions and Optimizers
+
+Training a Feed-Forward Neural Network involves minimizing a **loss function** (also called a cost function) which quantifies the difference between the network's predictions and the true target values. The **optimizer** is then responsible for adjusting the network's weights and biases to reduce this loss.
+
+##### 3.4.1. Loss Functions
+
+*   **Purpose:** Measure how well the model is performing. A lower loss value indicates a better-performing model.
+*   **Common Examples:**
+    *   **Mean Squared Error (MSE):** `Loss = (1/N) * sum((y_true - y_pred)^2)`.
+    *   **Use Case:** Primarily used for regression problems, where the goal is to predict continuous numerical values.
+    *   **Binary Cross-Entropy:** `Loss = - (y_true * log(y_pred) + (1 - y_true) * log(1 - y_pred))`.
+    *   **Use Case:** Used for binary classification problems (two classes), typically when the output layer has a sigmoid activation function.
+    *   **Categorical Cross-Entropy (or Sparse Categorical Cross-Entropy):** `Loss = - sum(y_true * log(y_pred))`.
+    *   **Use Case:** Used for multi-class classification problems. Categorical Cross-Entropy is for one-hot encoded labels, while Sparse Categorical Cross-Entropy is for integer labels.
+
+##### 3.4.2. Optimizers
+
+*   **Purpose:** Algorithms that adjust the model's parameters (weights and biases) during training to minimize the loss function. They determine how the network learns.
+*   **Common Examples:**
+    *   **Stochastic Gradient Descent (SGD):** A basic optimizer that updates weights in the direction opposite to the gradient of the loss function. Often includes momentum to accelerate convergence and dampen oscillations.
+    *   **Adam (Adaptive Moment Estimation):** A popular and generally effective optimizer that combines concepts from RMSprop and Adagrad. It adaptively adjusts learning rates for each parameter based on estimates of first and second moments of the gradients.
+    *   **RMSprop (Root Mean Square Propagation):** An optimizer that maintains a moving average of squared gradients and divides the learning rate by this average, helping to adapt the learning rate for each parameter.
+
 ### 4. Architectural Trade-offs
 
-FFNNs, while fundamental, have specific strengths and weaknesses that dictate their suitability for various tasks.
+FFNNs, while fundamental, have specific strengths and weaknesses that dictate their suitability for various tasks. Understanding these trade-offs is crucial for selecting the appropriate architecture.
 
 #### 4.1. Strengths
 
-*   **Simplicity and Interpretability (Relative):** Compared to more complex deep learning architectures, simpler FFNNs (especially those with fewer hidden layers) can be easier to understand and debug.
-*   **Universal Approximation Theorem:** A feed-forward network with a single hidden layer containing a finite number of neurons can approximate any continuous function to arbitrary accuracy. This theoretical backing highlights their power for learning complex mappings.
-*   **Flexibility for Tabular Data:** FFNNs are highly effective for learning patterns in structured, tabular data where features do not have strong spatial or temporal relationships (unlike images or sequences).
-*   **Foundation for Deep Learning:** They serve as the foundational architecture upon which more specialized neural networks (like CNNs for images and RNNs for sequences) are built, often appearing as "dense" layers at the end of such specialized networks.
+*   **Simplicity and Interpretability (Relative):** Compared to more complex deep learning architectures like deep CNNs or complex RNNs, simpler FFNNs (especially those with fewer hidden layers) are generally easier to understand, debug, and interpret. Their fully connected nature makes the flow of information more direct.
+*   **Universal Approximation Theorem:** A feed-forward network with a single hidden layer containing a finite number of neurons can approximate any continuous function to arbitrary accuracy. This theoretical backing highlights their power for learning complex mappings, provided sufficient neurons and appropriate training.
+*   **Flexibility for Tabular Data:** FFNNs are highly effective for learning patterns in structured, tabular data where features do not have strong inherent spatial or temporal relationships (unlike images or sequences). For datasets where each row is an independent observation with distinct features (e.g., customer data, sensor readings), FFNNs often perform very well.
+*   **Foundation for Deep Learning:** They serve as the foundational architecture upon which more specialized neural networks (like CNNs for images and RNNs/Transformers for sequences) are built. FFNNs are frequently used as the final "classification head" or "regression tail" of these more complex models, processing the high-level features extracted by specialized layers.
 
 #### 4.2. Weaknesses
 
-*   **Lack of Spatial/Temporal Awareness:** FFNNs treat all input features independently. They do not inherently understand spatial relationships (e.g., in images) or temporal dependencies (e.g., in time series or natural language), making them less efficient and powerful for such data compared to CNNs or RNNs.
-*   **High Parameter Count (for complex tasks):** For tasks involving high-dimensional inputs (like raw images), a fully connected FFNN would require an enormous number of parameters, leading to computational inefficiency and a high risk of overfitting without careful regularization.
-*   **Vanishing/Exploding Gradients:** In deep FFNNs, gradients can become extremely small (vanishing) or very large (exploding) during backpropagation, making it difficult for the network to learn, especially in earlier layers. This was a major challenge before the advent of ReLU activations and better initialization techniques.
-*   **Inefficiency for Large Inputs:** Processing large inputs like high-resolution images with a fully connected FFNN is computationally expensive and generally outperformed by CNNs due to parameter sharing and local receptive fields.
+*   **Lack of Spatial/Temporal Awareness:** FFNNs treat all input features independently. They do not inherently understand spatial relationships (e.g., the proximity of pixels in an image) or temporal dependencies (e.g., the order of words in a sentence or time steps in a series). This makes them significantly less efficient and powerful for such data compared to architectures like CNNs (for spatial data) or RNNs/Transformers (for sequential data).
+*   **High Parameter Count (for complex tasks):** For tasks involving high-dimensional inputs, especially raw grid-like data such as images, a fully connected FFNN would require an enormous number of parameters. For instance, a 28x28 image flattened for an FFNN has 784 input features; connecting this to a hidden layer with 128 neurons alone requires 784 * 128 = 100,352 weights. This leads to computational inefficiency and a high risk of overfitting without careful regularization.
+*   **Vanishing/Exploding Gradients:** In deep FFNNs, gradients calculated during backpropagation can become extremely small (vanishing) or very large (exploding) as they propagate through many layers. This makes it difficult for the network to learn effectively, especially in earlier layers. The advent of ReLU activation functions, better weight initialization strategies, and techniques like batch normalization has helped mitigate these issues.
+*   **Inefficiency for Large Inputs:** Processing large inputs like high-resolution images with a fully connected FFNN is computationally expensive and generally outperformed by CNNs. CNNs leverage parameter sharing and local receptive fields, which are far more efficient for capturing spatial hierarchies in images.
 
 ### 5. Practical Applications & Use Cases
 
@@ -270,44 +310,49 @@ churn_prob = (
     0.2 * support_calls / 10 +
     0.3 * (1 - contract_type)
 )
-churn_prob = np.clip(churn_prob, 0.05, 0.95) # Clip probabilities to reasonable range
-churn = (np.random.rand(num_samples) < churn_prob).astype(int)
+churn_prob = np.clip(churn_prob, 0.05, 0.95) # Clip probabilities to reasonable range.
+churn = (np.random.rand(num_samples) < churn_prob).astype(int) # Generate binary churn labels based on probabilities.
 
-X = np.stack([age, income, usage_duration, support_calls, contract_type], axis=1)
-y = churn
+X = np.stack([age, income, usage_duration, support_calls, contract_type], axis=1) # Combine features into input matrix X.
+y = churn # Assign churn labels to target vector y.
 
 # 2. Preprocess data
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
+scaler = StandardScaler() # Initialize a StandardScaler for feature scaling.
+X_scaled = scaler.fit_transform(X) # Fit the scaler and transform the input features.
 
+# Split the data into training and testing sets.
 X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
 
 # 3. Define the FFNN model architecture
 model = models.Sequential([
-    layers.Dense(32, activation='relu', input_shape=(X_train.shape[1],)), # Input layer + first hidden layer
-    layers.Dense(16, activation='relu'), # Second hidden layer
-    layers.Dense(1, activation='sigmoid') # Output layer for binary classification
+    # Input layer and first hidden layer: 32 neurons, ReLU activation, input shape based on number of features.
+    layers.Dense(32, activation='relu', input_shape=(X_train.shape[1],)), 
+    # Second hidden layer: 16 neurons with ReLU activation.
+    layers.Dense(16, activation='relu'), 
+    # Output layer for binary classification: 1 neuron with sigmoid activation 
+    # to output a probability between 0 and 1.
+    layers.Dense(1, activation='sigmoid') 
 ])
 
-model.summary()
+model.summary() # Print a summary of the model architecture.
 
 # 4. Compile the model
-model.compile(optimizer='adam',
-              loss='binary_crossentropy', # Appropriate loss for binary classification
-              metrics=['accuracy'])
+model.compile(optimizer='adam', # Use the Adam optimizer for efficient training.
+              loss='binary_crossentropy', # Use binary cross-entropy as the loss function for binary classification.
+              metrics=['accuracy']) # Monitor accuracy during training.
 
 # 5. Train the model
-# history = model.fit(X_train, y_train, epochs=10, batch_size=32, validation_data=(X_test, y_test))
+history = model.fit(X_train, y_train, epochs=10, batch_size=32, validation_data=(X_test, y_test)) # Train the model for 10 epochs.
 
 # 6. Evaluate the model
-# test_loss, test_acc = model.evaluate(X_test, y_test, verbose=2)
-# print(f"\nTest accuracy: {test_acc:.4f}")
+test_loss, test_acc = model.evaluate(X_test, y_test, verbose=2) # Evaluate model performance on the test set.
+print(f"\nTest accuracy: {test_acc:.4f}")
 
 # 7. Make predictions
-# predictions = (model.predict(X_test) > 0.5).astype(int)
-# print("\nSample predictions vs actual:")
-# for i in range(5):
-#     print(f"Predicted: {predictions[i][0]}, Actual: {y_test[i]}")
+predictions = (model.predict(X_test) > 0.5).astype(int) # Get binary predictions from probabilities (threshold at 0.5).
+print("\nSample predictions vs actual:")
+for i in range(5):
+    print(f"Predicted: {predictions[i][0]}, Actual: {y_test[i]}")
 ```
 
 ### 6. Complete Code Examples (MNIST)
@@ -341,7 +386,7 @@ model = models.Sequential([
     layers.Dense(10, activation='softmax') # Output layer for 10 classes
 ])
 
-model.summary()
+model.summary() # Print a summary of the model architecture.
 
 # 3. Compile the model
 model.compile(optimizer='adam',
@@ -370,14 +415,16 @@ from torch.utils.data import DataLoader
 
 # 1. Define transformations and load the MNIST dataset
 transform = transforms.Compose([
-    transforms.ToTensor(), # Converts PIL image to PyTorch tensor (0-1 range)
-    transforms.Normalize((0.1307,), (0.3081,)), # Normalize with MNIST mean and std dev
-    transforms.Lambda(lambda x: x.view(-1)) # Flatten the 28x28 image to 784-vector
+    transforms.ToTensor(), # Converts PIL image to PyTorch tensor (0-1 range).
+    transforms.Normalize((0.1307,), (0.3081,)), # Normalize with MNIST mean and std dev for better training stability.
+    transforms.Lambda(lambda x: x.view(-1)) # Flatten the 28x28 image tensor into a 784-element vector.
 ])
 
+# Load the training and testing datasets. 'download=True' will fetch the data if not already present.
 train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
 test_dataset = datasets.MNIST(root='./data', train=False, download=True, transform=transform)
 
+# Create DataLoaders for batching and shuffling the data.
 train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=1000, shuffle=False)
 
@@ -385,53 +432,61 @@ test_loader = DataLoader(test_dataset, batch_size=1000, shuffle=False)
 class SimpleFFNN(nn.Module):
     def __init__(self):
         super(SimpleFFNN, self).__init__()
-        self.fc1 = nn.Linear(28 * 28, 128) # Input layer (784) to first hidden layer (128)
-        self.relu1 = nn.ReLU()
-        self.fc2 = nn.Linear(128, 64)      # First hidden layer to second hidden layer
-        self.relu2 = nn.ReLU()
-        self.fc3 = nn.Linear(64, 10)       # Second hidden layer to output layer (10 classes)
+        # Define the first fully connected layer: input size 784 (28*28), output size 128.
+        self.fc1 = nn.Linear(28 * 28, 128)
+        self.relu1 = nn.ReLU() # Apply ReLU activation after the first layer.
+        # Define the second fully connected layer: input size 128, output size 64.
+        self.fc2 = nn.Linear(128, 64)
+        self.relu2 = nn.ReLU() # Apply ReLU activation after the second layer.
+        # Define the output fully connected layer: input size 64, output size 10 (for 10 digits).
+        self.fc3 = nn.Linear(64, 10)
 
     def forward(self, x):
+        # Define the forward pass: how data flows through the layers.
         x = self.relu1(self.fc1(x))
         x = self.relu2(self.fc2(x))
-        x = self.fc3(x)
-        return x # Raw logits, CrossEntropyLoss will apply softmax internally
+        x = self.fc3(x) # Output raw logits (scores).
+        return x # Return raw logits; CrossEntropyLoss will apply softmax internally.
 
-model = SimpleFFNN()
+model = SimpleFFNN() # Instantiate the model.
 
 # 3. Define loss function and optimizer
-criterion = nn.CrossEntropyLoss() # Includes Softmax
+# CrossEntropyLoss is suitable for multi-class classification and includes Softmax.
+criterion = nn.CrossEntropyLoss()
+# Adam optimizer is a popular choice for adaptive learning rates.
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # 4. Train the model
 def train_model(num_epochs):
-    model.train()
+    model.train() # Set the model to training mode.
     for epoch in range(num_epochs):
         for batch_idx, (data, target) in enumerate(train_loader):
-            optimizer.zero_grad()
-            outputs = model(data)
-            loss = criterion(outputs, target)
-            loss.backward()
-            optimizer.step()
+            optimizer.zero_grad() # Clear previous gradients.
+            outputs = model(data) # Forward pass: get model predictions.
+            loss = criterion(outputs, target) # Calculate the loss.
+            loss.backward() # Backward pass: compute gradients.
+            optimizer.step() # Update model parameters.
+            # Print status updates periodically.
             if (batch_idx + 1) % 100 == 0:
                 print(f'Epoch [{epoch+1}/{num_epochs}], Step [{batch_idx+1}/{len(train_loader)}], Loss: {loss.item():.4f}')
 
-train_model(num_epochs=10)
+train_model(num_epochs=10) # Train the model for 10 epochs.
 
 # 5. Evaluate the model
 def evaluate_model():
-    model.eval()
-    with torch.no_grad():
+    model.eval() # Set the model to evaluation mode (disables dropout, etc.).
+    with torch.no_grad(): # Disable gradient calculation for evaluation.
         correct = 0
         total = 0
         for data, target in test_loader:
             outputs = model(data)
+            # Get the index of the max log-probability (predicted class).
             _, predicted = torch.max(outputs.data, 1)
             total += target.size(0)
-            correct += (predicted == target).sum().item()
+            correct += (predicted == target).sum().item() # Count correct predictions.
         print(f'Test Accuracy: {100 * correct / total:.2f}%')
 
-evaluate_model()
+evaluate_model() # Run the evaluation.
 ```
 
 ### 7. Evolution and Impact
