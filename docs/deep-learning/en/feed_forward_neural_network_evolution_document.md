@@ -74,6 +74,104 @@ The output layer is the "final reporting department." After all the processing i
     *   **Softmax:** Converts a vector of arbitrary real values into a probability distribution. For an input vector `z` of `K` dimensions, the softmax function is `P(y=j|z) = e^(z_j) / sum(e^(z_k) for k in 1 to K)`.
     *   **Use Case:** Exclusively used in the output layer for multi-class classification, where it assigns probabilities to each class that sum up to 1.
 
+#### 2.6. Forward Pass: How Information Flows
+
+**Mental Model / Analogy:**
+Think of the forward pass as an assembly line in a factory. Raw materials (input data) enter at one end, and each workstation (neuron) processes the materials according to its specific instructions (weights and activation function), passing the semi-finished product to the next station. The final product (prediction) emerges at the end of the line.
+
+The forward pass is the process where input data propagates through the network to produce an output. For each neuron, this involves:
+
+1. **Weighted Sum:** `z = sum(w_i * x_i) + b` where `w_i` are weights, `x_i` are inputs, and `b` is the bias
+2. **Activation:** `a = f(z)` where `f` is the activation function (ReLU, sigmoid, etc.)
+3. **Propagation:** The output `a` becomes the input for the next layer
+
+**Mermaid Diagram: Forward Pass Computation Flow**
+
+```mermaid
+graph TD
+    subgraph Input_Layer["Input Layer"]
+        X1["x₁ = 0.5"]
+        X2["x₂ = 0.8"]
+        X3["x₃ = 0.3"]
+    end
+
+    subgraph Hidden_Layer["First Hidden Layer"]
+        H1["Neuron h₁:<br/>z₁ = w₁₁x₁ + w₁₂x₂ + w₁₃x₃ + b₁<br/>a₁ = ReLU(z₁)"]
+        H2["Neuron h₂:<br/>z₂ = w₂₁x₁ + w₂₂x₂ + w₂₃x₃ + b₂<br/>a₂ = ReLU(z₂)"]
+    end
+
+    subgraph Output_Layer["Output Layer"]
+        O1["Neuron y₁:<br/>z₃ = w₃₁a₁ + w₃₂a₂ + b₃<br/>output = σ(z₃)"]
+    end
+
+    X1 --> H1
+    X2 --> H1
+    X3 --> H1
+    X1 --> H2
+    X2 --> H2
+    X3 --> H2
+
+    H1 --> O1
+    H2 --> O1
+
+    style Input_Layer fill:#e1f5ff
+    style Hidden_Layer fill:#fff4e1
+    style Output_Layer fill:#ffe1e1
+```
+
+#### 2.7. Backpropagation: How Networks Learn
+
+**Mental Model / Analogy:**
+Imagine you're archery and you miss the bullseye. Backpropagation is like analyzing *why* you missed: "I aimed too high and pulled the string too tight." You then mentally adjust your technique for the next shot. In a neural network, this "adjustment" happens mathematically, propagating backward from the output error to determine how much each weight and bias contributed to the mistake.
+
+Backpropagation is the algorithm that enables neural networks to learn. It computes the gradient of the loss function with respect to each weight, indicating how much each parameter should be adjusted to reduce error.
+
+**The Backpropagation Process:**
+
+1. **Forward Pass:** Compute predictions and calculate loss (difference from true values)
+2. **Backward Pass:** Calculate gradients using the chain rule
+   - Output layer gradient: `∂L/∂z_output`
+   - Hidden layer gradients: Propagate error backward through each layer
+   - Weight gradients: `∂L/∂w = (∂L/∂z) * (∂z/∂w)`
+3. **Weight Update:** Adjust weights using the optimizer: `w_new = w_old - learning_rate * gradient`
+
+**Mermaid Diagram: Backpropagation Flow**
+
+```mermaid
+graph TB
+    subgraph Forward["Forward Pass (Compute Output)"]
+        direction TB
+        F1["Input: x"]
+        F2["Hidden: h = ReULU(Wx + b)"]
+        F3["Output: ŷ = σ(W'h + b')"]
+        F4["Loss: L = loss(ŷ, y_true)"]
+    end
+
+    subgraph Backward["Backward Pass (Compute Gradients)"]
+        direction TB
+        B1["∂L/∂ŷ = derivative of loss"]
+        B2["∂L/∂W' = ∂L/∂ŷ × ∂ŷ/∂W'<br/>(chain rule)"]
+        B3["∂L/∂h = propagate error back<br/>through activation"]
+        B4["∂L/∂W = ∂L/∂h × ∂h/∂W"]
+    end
+
+    subgraph Update["Update Weights"]
+        direction TB
+        U1["W ← W - η × ∂L/∂W<br/>(η = learning rate)"]
+    end
+
+    F4 -->|"error signal"| B1
+    B1 --> B2
+    B2 --> B3
+    B3 --> B4
+    B4 --> U1
+    U1 -.->|"improved weights"| F1
+
+    style Forward fill:#d4edda
+    style Backward fill:#f8d7da
+    style Update fill:#fff3cd
+```
+
 **Mermaid Diagram: FFNN Core Architecture**
 
 ```mermaid
@@ -82,6 +180,38 @@ graph TD
     H1 --> H2(Hidden Layer 2)
     H2 --> O[Output Layer]
 ```
+
+#### 2.8. Universal Approximation Theorem
+
+**Mental Model / Analogy:**
+Imagine you have an unlimited supply of flexible building blocks (like LEGO bricks or flexible tubes). Even with just one layer of these blocks, if you have enough of them and can arrange them properly, you can build or approximate almost any shape imaginable. The Universal Approximation Theorem says this is true for neural networks: a single hidden layer with enough neurons can approximate any continuous function.
+
+The **Universal Approximation Theorem** (proven by Cybenko in 1989 and Hornik in 1991) is a foundational result in neural network theory. It states that:
+
+> **A feed-forward neural network with a single hidden layer containing a finite number of neurons can approximate any continuous function on compact subsets of ℝⁿ to any degree of accuracy, provided the activation function is non-constant, bounded, and continuous (such as sigmoid).**
+
+**Key Implications:**
+
+1. **Theoretical Power:** FFNNs are *universal function approximators* - they can represent any continuous mapping from inputs to outputs given sufficient hidden neurons.
+
+2. **Practical Limitation:** While the theorem guarantees approximation is *possible*, it doesn't specify:
+   - How many neurons are needed
+   - How to find the right weights
+   - How long training will take
+
+   In practice, deep networks (multiple hidden layers) are often more efficient than shallow, wide networks.
+
+3. **Depth Efficiency:** While a single hidden layer is theoretically sufficient, deeper networks can represent some functions exponentially more efficiently (fewer total neurons needed).
+
+**Why Deep Networks Still Matter:**
+
+The theorem might suggest that shallow networks are sufficient, but deep networks offer advantages:
+- **Hierarchical Feature Learning:** Each layer can build increasingly abstract features
+- **Parameter Efficiency:** Deep networks can represent some functions with exponentially fewer parameters
+- **Generalization:** Deep networks often generalize better from limited data
+- **Optimization Landscape:** Deep networks can have optimization properties that make training more stable
+
+**Example:** Consider approximating a complex decision boundary. A shallow network might need thousands of neurons in one hidden layer, while a deep network with just a few neurons per layer across multiple layers could achieve the same approximation more efficiently.
 
 ### 3. Detailed API Overview (Conceptual)
 
@@ -246,6 +376,71 @@ Training a Feed-Forward Neural Network involves minimizing a **loss function** (
     *   **Stochastic Gradient Descent (SGD):** A basic optimizer that updates weights in the direction opposite to the gradient of the loss function. Often includes momentum to accelerate convergence and dampen oscillations.
     *   **Adam (Adaptive Moment Estimation):** A popular and generally effective optimizer that combines concepts from RMSprop and Adagrad. It adaptively adjusts learning rates for each parameter based on estimates of first and second moments of the gradients.
     *   **RMSprop (Root Mean Square Propagation):** An optimizer that maintains a moving average of squared gradients and divides the learning rate by this average, helping to adapt the learning rate for each parameter.
+
+#### 3.5. Weight Initialization
+
+**Mental Model / Analogy:**
+Imagine starting a race. If you start at the very back of the pack, you'll have a hard time catching up. If you start way ahead of everyone else, you might get complacent. Weight initialization is about choosing a good starting position for training - not too small, not too large, just right.
+
+Weight initialization is the process of setting the initial values for a neural network's weights before training begins. Proper initialization is critical for effective training - poor initialization can lead to vanishing/exploding gradients, slow convergence, or complete failure to learn.
+
+**Why Initialization Matters:**
+
+When weights are initialized poorly:
+- **Too small:** Gradients vanish as they propagate backward; neurons in early layers learn very slowly
+- **Too large:** Gradients explode; activations become saturated; training becomes unstable
+- **Just right:** Gradients flow smoothly; all layers learn at similar rates; training converges efficiently
+
+**Common Initialization Strategies:**
+
+##### 3.5.1. Random Initialization (Historical)
+
+- **Approach:** Sample from uniform or normal distribution with small random values
+- **Problem:** Doesn't account for network depth or activation function properties
+- **Status:** Largely superseded by better methods
+
+##### 3.5.2. Xavier/Glorot Initialization (for Sigmoid/Tanh)
+
+- **Formula:** `W ~ U(-√(6/(n_in + n_out)), √(6/(n_in + n_out)))` or `N(0, √(2/(n_in + n_out)))`
+- **Designed for:** Sigmoid and Tanh activations
+- **Intuition:** Scales weights based on the number of input and output connections to maintain variance of activations and gradients across layers
+- **Use Case:** Networks using sigmoid or tanh activation functions
+
+##### 3.5.3. He Initialization (for ReLU)
+
+- **Formula:** `W ~ N(0, √(2/n_in))`
+- **Designed for:** ReLU and its variants (Leaky ReLU, Parametric ReLU)
+- **Intuition:** ReLU zeroes out negative values, so variance is halved; He initialization compensates for this
+- **Use Case:** Most modern deep networks using ReLU-family activations (default choice in many frameworks)
+
+**Quick Reference:**
+
+| Initialization | Best Activation | Framework Keyword |
+|:---|:---|:---|
+| Xavier/Glorot Uniform | Sigmoid, Tanh, Softmax | `glorot_uniform` |
+| Xavier/Glorot Normal | Sigmoid, Tanh, Softmax | `glorot_normal` |
+| He Normal | ReLU, Leaky ReLU | `he_normal` |
+| He Uniform | ReLU, Leaky ReLU | `he_uniform` |
+
+**Code Example (Keras):**
+```python
+from tensorflow.keras import layers
+from tensorflow.keras.initializers import HeNormal
+
+# Using He initialization (recommended for ReLU)
+layer = layers.Dense(64, activation='relu',
+                    kernel_initializer=HeNormal())
+
+# Using Xavier initialization (for sigmoid/tanh)
+layer = layers.Dense(64, activation='sigmoid',
+                    kernel_initializer='glorot_uniform')
+```
+
+**Practical Guidance:**
+- For ReLU networks (most common): Use **He initialization**
+- For sigmoid/tanh networks: Use **Xavier/Glorot initialization**
+- Framework defaults are usually sensible choices
+- If training fails to converge, try different initialization strategies
 
 ### 4. Architectural Trade-offs
 
