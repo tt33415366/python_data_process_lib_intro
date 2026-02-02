@@ -474,10 +474,10 @@ Processing "cat":
 ┌─────────────────────────────────────────────────┐
 │  Word: "cat"                                    │
 │                                                 │
-│  Query (Q): "I'm a noun, looking for verbs     │
-│             that might describe my action"      │
+│  Query (Q): "A noun, looking for verbs         │
+│             that might describe its action"     │
 │                                                 │
-│  Key (K): "I'm a furry animal noun"            │
+│  Key (K): "A furry animal noun"                │
 │                                                 │
 │  Value (V): [0.5, 0.8, -0.2, ...]              │
 │             (actual information about "cat")    │
