@@ -16,7 +16,7 @@ docs/
 ├── concurrency/          # Async programming patterns
 ├── context/              # Project metadata (GEMINI.md)
 ├── data-processing/      # NumPy, Pandas, SciPy, Dask, RMSE/R-squared
-├── deep-learning/        # PyTorch, TensorFlow, Keras, CNN, Transformer, RL concepts
+├── deep-learning/        # PyTorch, TensorFlow, Keras, CNN, Transformer, FFNN, RL concepts
 ├── gpu-computing/        # CUDA
 ├── ml/                   # Scikit-learn, XGBoost, LightGBM
 ├── nlp/                  # NLTK, spaCy
@@ -99,6 +99,8 @@ When adding a new library:
 4. Use existing documents (especially `numpy_evolution_document.md`) as a template
 5. Update README.md to include the new library in the "Covered Libraries" section
 6. Update both README.md and README.zh.md (bilingual updates required)
+
+**File Naming Convention:** Use underscores for multi-word concepts (e.g., `feed_forward_neural_network_evolution_document.md`, `markov_chain_evolution_document.md`). The full name appears in the filename before `_evolution_document.md`.
 
 ## Document Quality Checklist
 
