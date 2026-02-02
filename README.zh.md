@@ -64,6 +64,7 @@ docs/
 - **[Keras](./docs/deep-learning/zh/keras_evolution_document.zh.md)** - 高级神经网络 API
 - **[CNN](./docs/deep-learning/zh/cnn_evolution_document.zh.md)** - 用于计算机视觉的卷积神经网络
 - **[Transformer](./docs/deep-learning/zh/transformer_evolution_document.zh.md)** - 用于序列处理的基于注意力的模型
+- **[Transformer 入门指南](./docs/deep-learning/zh/transformer_introduction_for_beginners.zh.md)** - 🌟 面向初学者的 Transformer 介绍 - 无需 ML 背景！
 - **[残差连接](./docs/deep-learning/zh/residual_connection_evolution_document.zh.md)** - 深度神经网络的基础跳跃连接架构
 - **[图解 Transformer](./docs/deep-learning/zh/the_annotated_transformer.zh.md)** - Transformer 模型的带注释实现
 - **[RF-DETR](./docs/deep-learning/zh/rf_detr_evolution_document.zh.md)** - 实时检测与分割模型
