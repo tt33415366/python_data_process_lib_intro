@@ -94,6 +94,7 @@ docs/
 - **[李代数方法](./docs/computer-graphics/zh/lie_algebra_method_evolution_document.zh.md)** - 连续对称性的数学方法
 - **[NURBS](./docs/computer-graphics/zh/nurbs_evolution_document.zh.md)** - 计算机图形学中曲线和曲面的数学模型
 - **[SLAM](./docs/computer-graphics/zh/slam_evolution_document.zh.md)** - 计算机视觉和机器人中的同时定位与地图构建系统
+- **[SLAM 初学者介绍](./docs/computer-graphics/zh/slam_introduction_for_beginners.zh.md)** - 🌟 SLAM温和介绍 - 无需机器人背景！
 
 ### 🚀 GPU 加速计算
 - **[CUDA](./docs/gpu-computing/zh/cuda_evolution_document.zh.md)** - NVIDIA 的并行计算平台和编程模型

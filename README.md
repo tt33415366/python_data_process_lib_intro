@@ -94,6 +94,7 @@ docs/
 - **[Lie Algebra Method](./docs/computer-graphics/en/lie_algebra_method_evolution_document.md)** - Mathematical approach for continuous symmetries
 - **[NURBS](./docs/computer-graphics/en/nurbs_evolution_document.md)** - Mathematical model for curves and surfaces in computer graphics
 - **[SLAM](./docs/computer-graphics/en/slam_evolution_document.md)** - Simultaneous Localization and Mapping systems in computer vision and robotics
+- **[SLAM Introduction for Beginners](./docs/computer-graphics/en/slam_introduction_for_beginners.md)** - 🌟 A gentle introduction to SLAM - no robotics background required!
 
 ### 🚀 GPU Computing
 - **[CUDA](./docs/gpu-computing/en/cuda_evolution_document.md)** - NVIDIA's parallel computing platform and programming model
