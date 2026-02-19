@@ -212,7 +212,7 @@ This project builds upon the incredible work of the Python scientific computing 
 **📚 Start exploring**: Choose a library from the [Covered Libraries](#-covered-libraries) section above, or browse the `docs/` directory structure.
 
 **🔍 Quick Navigation**:
-- [Data Processing](./docs/data-processing/en/) | [Deep Learning](./docs/deep-learning/en/) | [Machine Learning](./docs/ml/en/) | [NLP](./docs/nlp/en/) | [Visualization](./docs/visualization/en/) | [Computer Graphics](./docs/computer-graphics/en/) | [GPU Computing](./docs/gpu-computing/en/) | [Concurrency](./docs/concurrency/en/)
+- [Data Processing](./docs/data-processing/en/) | [Deep Learning](./docs/deep-learning/en/) | [Machine Learning](./docs/ml/en/) | [NLP](./docs/nlp/en/) | [Visualization](./docs/visualization/en/) | [Computer Graphics](./docs/computer-graphics/en/) | [GPU Computing](./docs/gpu-computing/en/) | [Concurrency](./docs/concurrency/en/) | [Glossary](./docs/glossary.md)
 - [English Docs](./README.md) | [中文文档](./README.zh.md)
 
 **💡 Need Help?** Check out [CODEBUDDY.md](./CODEBUDDY.md) for detailed repository guidance and conventions.

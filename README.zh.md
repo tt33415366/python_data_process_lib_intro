@@ -212,7 +212,7 @@ docs/
 **📚 开始探索**: 从上面的[涵盖的库](#-涵盖的库)部分选择一个库，或浏览 `docs/` 目录结构。
 
 **🔍 快速导航**: 
-- [数据处理](./docs/data-processing/zh/) | [深度学习](./docs/deep-learning/zh/) | [机器学习](./docs/ml/zh/) | [自然语言处理](./docs/nlp/zh/) | [数据可视化](./docs/visualization/zh/) | [计算机图形学](./docs/computer-graphics/zh/) | [GPU 加速计算](./docs/gpu-computing/zh/) | [并发](./docs/concurrency/zh/)
+- [数据处理](./docs/data-processing/zh/) | [深度学习](./docs/deep-learning/zh/) | [机器学习](./docs/ml/zh/) | [自然语言处理](./docs/nlp/zh/) | [数据可视化](./docs/visualization/zh/) | [计算机图形学](./docs/computer-graphics/zh/) | [GPU 加速计算](./docs/gpu-computing/zh/) | [并发](./docs/concurrency/zh/) | [术语表](./docs/glossary.zh.md)
 - [English Docs](./README.md) | [中文文档](./README.zh.md)
 
 **💡 需要帮助？** 查看 [CODEBUDDY.md](./CODEBUDDY.md) 了解详细的仓库指导和约定。
