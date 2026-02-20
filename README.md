@@ -71,6 +71,7 @@ docs/
 - **[RF-DETR Seg (Preview)](./docs/deep-learning/en/rf_detr_seg_preview_evolution_document.md)** - Real-time Detection and Segmentation Model (Preview)
 - **[Markov Chain](./docs/deep-learning/en/markov_chain_evolution_document.md)** - Mathematical framework for sequential decision-making under uncertainty
 - **[Reinforcement Learning](./docs/deep-learning/en/reinforcement_learning_evolution_document.md)** - Algorithms and theory for agents learning optimal behavior through interaction
+- **[Reinforcement Learning Introduction for Beginners](./docs/deep-learning/en/reinforcement_learning_introduction_for_beginners.md)** - 🌟 A gentle introduction to RL - no ML background required!
 - **[Q-learning](./docs/deep-learning/en/q_learning_evolution_document.md)** - Model-free reinforcement learning algorithm for optimal policy learning
 - **[TD-learning](./docs/deep-learning/en/td_learning_evolution_document.md)** - Temporal Difference learning methods for value estimation
 - **[Bellman Equation](./docs/deep-learning/en/bellman_equation_evolution_document.md)** - Fundamental equation in dynamic programming and reinforcement learning
