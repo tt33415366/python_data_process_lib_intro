@@ -75,6 +75,7 @@ docs/
 - **[Q-learning](./docs/deep-learning/zh/q_learning_evolution_document.zh.md)** - 用于最优策略学习的无模型强化学习算法
 - **[TD-learning](./docs/deep-learning/zh/td_learning_evolution_document.zh.md)** - 用于价值估计的时序差分学习方法
 - **[贝尔曼方程](./docs/deep-learning/zh/bellman_equation_evolution_document.zh.md)** - 动态规划和强化学习中的基本方程
+- **[贝尔曼方程入门指南](./docs/deep-learning/zh/bellman_equation_introduction_for_beginners.zh.md)** - 🌟 面向初学者的贝尔曼方程介绍 - 无需复杂数学背景！
 
 ### 🤖 机器学习
 - **[Scikit-learn](./docs/ml/zh/scikit-learn_evolution_document.zh.md)** - 通用机器学习

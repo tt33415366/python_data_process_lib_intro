@@ -75,6 +75,7 @@ docs/
 - **[Q-learning](./docs/deep-learning/en/q_learning_evolution_document.md)** - Model-free reinforcement learning algorithm for optimal policy learning
 - **[TD-learning](./docs/deep-learning/en/td_learning_evolution_document.md)** - Temporal Difference learning methods for value estimation
 - **[Bellman Equation](./docs/deep-learning/en/bellman_equation_evolution_document.md)** - Fundamental equation in dynamic programming and reinforcement learning
+- **[A Beginner's Guide to the Bellman Equation](./docs/deep-learning/en/bellman_equation_introduction_for_beginners.md)** - 🌟 A gentle introduction to the Bellman Equation - no math background required!
 
 ### 🤖 Machine Learning
 - **[Scikit-learn](./docs/ml/en/scikit-learn_evolution_document.md)** - General-purpose machine learning
