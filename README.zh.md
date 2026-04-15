@@ -25,6 +25,9 @@ docs/
 ├── computer-graphics/ # 几何建模与渲染
 │   ├── en/
 │   └── zh/
+├── enterprise-architecture/ # 企业架构框架
+│   ├── en/
+│   └── zh/
 ├── gpu-computing/     # GPU 加速计算
 │   ├── en/
 │   └── zh/
@@ -90,6 +93,9 @@ docs/
 - **[Matplotlib](./docs/visualization/zh/matplotlib_evolution_document.zh.md)** - 基础绘图库
 - **[Plotly](./docs/visualization/zh/plotly_evolution_document.zh.md)** - 交互式可视化
 - **[Seaborn](./docs/visualization/zh/seaborn_evolution_document.zh.md)** - 统计数据可视化
+
+### 🏢 企业架构
+- **[4A 企业架构领域](./docs/enterprise-architecture/zh/4a_enterprise_architecture_domains.zh.md)** - 业务、应用、数据和技术架构框架
 
 ### 💻 计算机图形学
 - **[G2 融合算法](./docs/computer-graphics/zh/g2_blending_algorithm_evolution_document.zh.md)** - 几何建模中 G2 连续性的方法
@@ -213,8 +219,8 @@ docs/
 
 **📚 开始探索**: 从上面的[涵盖的库](#-涵盖的库)部分选择一个库，或浏览 `docs/` 目录结构。
 
-**🔍 快速导航**: 
-- [数据处理](./docs/data-processing/zh/) | [深度学习](./docs/deep-learning/zh/) | [机器学习](./docs/ml/zh/) | [自然语言处理](./docs/nlp/zh/) | [数据可视化](./docs/visualization/zh/) | [计算机图形学](./docs/computer-graphics/zh/) | [GPU 加速计算](./docs/gpu-computing/zh/) | [并发](./docs/concurrency/zh/) | [术语表](./docs/glossary.zh.md)
+**🔍 快速导航**:
+- [数据处理](./docs/data-processing/zh/) | [深度学习](./docs/deep-learning/zh/) | [机器学习](./docs/ml/zh/) | [自然语言处理](./docs/nlp/zh/) | [数据可视化](./docs/visualization/zh/) | [企业架构](./docs/enterprise-architecture/zh/) | [计算机图形学](./docs/computer-graphics/zh/) | [GPU 加速计算](./docs/gpu-computing/zh/) | [并发](./docs/concurrency/zh/) | [术语表](./docs/glossary.zh.md)
 - [English Docs](./README.md) | [中文文档](./README.zh.md)
 
 **💡 需要帮助？** 查看 [CODEBUDDY.md](./CODEBUDDY.md) 了解详细的仓库指导和约定。

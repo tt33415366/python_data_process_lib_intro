@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI agents (Claude Code, Gemini, etc.) when working with code in this repository.
 
 ## Project Overview
 
@@ -12,7 +12,7 @@ This is a **documentation-only repository** containing "Evolution Documents" for
 
 ```
 docs/
-├── computer-graphics/    # Geometric modeling (NURBS, Lie Algebra, G2 blending)
+├── computer-graphics/    # Geometric modeling (NURBS, Lie Algebra, G2 blending, SLAM)
 ├── concurrency/          # Async programming patterns
 ├── context/              # Project metadata (GEMINI.md)
 ├── data-processing/      # NumPy, Pandas, SciPy, Dask, RMSE/R-squared
@@ -20,18 +20,43 @@ docs/
 ├── gpu-computing/        # CUDA
 ├── ml/                   # Scikit-learn, XGBoost, LightGBM
 ├── nlp/                  # NLTK, spaCy
-└── visualization/        # Matplotlib, Plotly, Seaborn
+├── visualization/        # Matplotlib, Plotly, Seaborn
+├── glossary.md           # English terminology glossary
+└── glossary.zh.md        # Chinese terminology glossary
 ```
 
 Each subdirectory contains `en/` (English) and `zh/` (Chinese) language versions.
 
 ## File Conventions
 
-**Document Pairs:** Every library document exists as an inseparable pair:
-- English: `<library>_evolution_document.md`
-- Chinese: `<library>_evolution_document.zh.md`
+### Document Types
 
-**CRITICAL:** When updating one document in a pair, you MUST apply the equivalent change to its counterpart. The Chinese version must be a perfect substitute for the English version in terms of structure, meaning, and information content.
+This repository contains three types of documents:
+
+1. **Evolution Documents** (primary): Comprehensive library documentation
+   - English: `<library>_evolution_document.md`
+   - Chinese: `<library>_evolution_document.zh.md`
+
+2. **Beginner Introductions**: Gentle introductions requiring no prior background
+   - English: `<topic>_introduction_for_beginners.md`
+   - Chinese: `<topic>_introduction_for_beginners.zh.md`
+
+3. **Annotated Implementations**: Code walkthroughs with detailed explanations
+   - English: `the_annotated_<topic>.md`
+   - Chinese: `the_annotated_<topic>.zh.md`
+   - Assets: `the_annotated_<topic>.assets/` directory for images
+
+### Document Pairs
+
+**CRITICAL:** Every document exists as an inseparable bilingual pair. When updating one document, you MUST apply the equivalent change to its counterpart. The Chinese version must be a perfect substitute for the English version in terms of structure, meaning, and information content.
+
+### File Naming Convention
+
+Use underscores for multi-word concepts. The full name appears before the document type suffix:
+
+- `feed_forward_neural_network_evolution_document.md`
+- `reinforcement_learning_introduction_for_beginners.md`
+- `the_annotated_transformer.md`
 
 ## Standard Document Structure
 
@@ -75,11 +100,48 @@ Ensure Mermaid syntax is valid. Test diagrams in your Markdown viewer before com
 
 ## Key Files
 
-- **README.md** - Project overview and navigation
-- **README.zh.md** - Chinese version of README
-- **CODEBUDDY.md** - Core guidelines for maintaining the repository (XP/SOLID principles)
-- **GEMINI.md** - Gemini-specific operational guidelines
-- **.mermaid_checks/** - Empty directory (placeholder for diagram validation tools)
+| File | Purpose |
+|------|---------|
+| `README.md` | Project overview and navigation |
+| `README.zh.md` | Chinese version of README |
+| `CODEBUDDY.md` | Core guidelines for maintaining the repository (XP/SOLID principles) |
+| `GEMINI.md` | Gemini-specific operational guidelines |
+| `AGENTS.md` | This file - AI agent guidance |
+| `docs/glossary.md` | English terminology definitions |
+| `docs/glossary.zh.md` | Chinese terminology definitions |
+| `.mermaid_checks/` | Empty directory (placeholder for diagram validation tools) |
+
+## Covered Libraries (as of March 2026)
+
+### Data Processing
+NumPy, Pandas, SciPy, Dask, RMSE/R-squared metrics
+
+### Deep Learning
+- **Frameworks:** PyTorch, TensorFlow, Keras
+- **Architectures:** CNN, Transformer, FFNN, Residual Connection, RF-DETR
+- **Annotated:** The Annotated Transformer
+- **Beginner Guides:** Transformer Introduction, Reinforcement Learning Introduction, Bellman Equation Introduction, Diffusion Introduction
+
+### Reinforcement Learning
+Markov Chain, MDP, Reinforcement Learning, Q-learning, TD-learning, Bellman Equation
+
+### Machine Learning
+Scikit-learn, XGBoost, LightGBM
+
+### NLP
+NLTK, spaCy
+
+### Visualization
+Matplotlib, Plotly, Seaborn
+
+### Computer Graphics
+NURBS, Lie Algebra Method, G2 Blending Algorithm, SLAM
+
+### GPU Computing
+CUDA
+
+### Concurrency
+Async/Await
 
 ## No Development Commands
 
@@ -93,14 +155,12 @@ This repository has:
 
 When adding a new library:
 
-1. Create both English (`*_evolution_document.md`) and Chinese (`*_evolution_document.zh.md`) versions
+1. Create both English and Chinese versions
 2. Follow the standard document structure exactly
 3. Include Mermaid diagrams for timeline, architecture, and API overview
 4. Use existing documents (especially `numpy_evolution_document.md`) as a template
 5. Update README.md to include the new library in the "Covered Libraries" section
 6. Update both README.md and README.zh.md (bilingual updates required)
-
-**File Naming Convention:** Use underscores for multi-word concepts (e.g., `feed_forward_neural_network_evolution_document.md`, `markov_chain_evolution_document.md`). The full name appears in the filename before `_evolution_document.md`.
 
 ## Document Quality Checklist
 

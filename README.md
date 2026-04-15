@@ -25,6 +25,9 @@ docs/
 ├── computer-graphics/ # Geometric modeling and rendering
 │   ├── en/
 │   └── zh/
+├── enterprise-architecture/ # Enterprise architecture frameworks
+│   ├── en/
+│   └── zh/
 ├── gpu-computing/     # GPU-accelerated computing
 │   ├── en/
 │   └── zh/
@@ -90,6 +93,9 @@ docs/
 - **[Matplotlib](./docs/visualization/en/matplotlib_evolution_document.md)** - Foundational plotting library
 - **[Plotly](./docs/visualization/en/plotly_evolution_document.md)** - Interactive visualizations
 - **[Seaborn](./docs/visualization/en/seaborn_evolution_document.md)** - Statistical data visualization
+
+### 🏢 Enterprise Architecture
+- **[4A Enterprise Architecture Domains](./docs/enterprise-architecture/en/4a_enterprise_architecture_domains.md)** - Business, Application, Data, and Technology architecture framework
 
 ### 💻 Computer Graphics
 - **[G2 Blending Algorithm](./docs/computer-graphics/en/g2_blending_algorithm_evolution_document.md)** - Methods for G2 continuity in geometric modeling
@@ -214,7 +220,7 @@ This project builds upon the incredible work of the Python scientific computing 
 **📚 Start exploring**: Choose a library from the [Covered Libraries](#-covered-libraries) section above, or browse the `docs/` directory structure.
 
 **🔍 Quick Navigation**:
-- [Data Processing](./docs/data-processing/en/) | [Deep Learning](./docs/deep-learning/en/) | [Machine Learning](./docs/ml/en/) | [NLP](./docs/nlp/en/) | [Visualization](./docs/visualization/en/) | [Computer Graphics](./docs/computer-graphics/en/) | [GPU Computing](./docs/gpu-computing/en/) | [Concurrency](./docs/concurrency/en/) | [Glossary](./docs/glossary.md)
+- [Data Processing](./docs/data-processing/en/) | [Deep Learning](./docs/deep-learning/en/) | [Machine Learning](./docs/ml/en/) | [NLP](./docs/nlp/en/) | [Visualization](./docs/visualization/en/) | [Enterprise Architecture](./docs/enterprise-architecture/en/) | [Computer Graphics](./docs/computer-graphics/en/) | [GPU Computing](./docs/gpu-computing/en/) | [Concurrency](./docs/concurrency/en/) | [Glossary](./docs/glossary.md)
 - [English Docs](./README.md) | [中文文档](./README.zh.md)
 
 **💡 Need Help?** Check out [CODEBUDDY.md](./CODEBUDDY.md) for detailed repository guidance and conventions.
