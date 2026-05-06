@@ -860,9 +860,43 @@ Transformer Evolution:
 
 ---
 
-## 7. Hands-On Intuition
+## 7. Hands-On Practice
 
-Let's compute attention by hand with a simple example. This will help you really understand how it works!
+Let's compute attention by hand with a simple example. This will help you truly understand how it works!
+
+### 7.0 Why Do We Compute Attention?
+
+Before we start calculating, let's understand the **purpose** and **what we'll achieve**.
+
+**Goal:** Transform each independent word vector into a "context-aware" representation.
+
+**Why is this needed?**
+
+In the original input, each word is independent:
+- `"cat"` → `[1.0, 0.5]` (knows only "cat" itself)
+- `"sat"` → `[0.5, 1.0]` (knows only "sat" itself)
+
+But understanding sentences requires knowing relationships between words! Through attention, we let each word "see" all other words:
+- `"cat"`'s new representation = original `"cat"` + information from `"sat"` + information from `"mat"`
+
+**The process:**
+```
+Input: Independent word vectors
+  ↓
+Attention computation (what we'll learn here)
+  ↓
+Output: Context-aware representations
+  ↓
+Passed to next layer (feed-forward network)
+```
+
+**What you'll learn:**
+1. How to compute attention weights step-by-step
+2. How to use these weights to create new representations
+3. How the new representations are used by Transformers
+4. How to interpret attention visualizations
+
+---
 
 ### 7.1 Setup: Simple Example
 
@@ -882,9 +916,28 @@ Word embeddings (V):
 
 Let's say Q and K are the same as V for this example:
 Q = K = V (self-attention)
+
+┌─────────────────────────────────────────────────────────────┐
+│  NOTE: In real Transformers, Q, K, V are computed through  │
+│  different weight matrices (W_Q, W_K, W_V). To simplify    │
+│  this example, we assume these are identity matrices,      │
+│  so Q=K=V.                                                  │
+│                                                             │
+│  In actual models:                                         │
+│  Q = X × W_Q (query projection)                            │
+│  K = X × W_K (key projection)                              │
+│  V = X × W_V (value projection)                            │
+│  where W_Q, W_K, W_V are learned parameter matrices        │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### 7.2 Step-by-Step Attention Computation
+### 7.2 Complete Step-by-Step Computation
+
+Let's compute attention for all three tokens.
+
+---
+
+#### For "cat":
 
 **Step 1: Compute Attention Scores (Q × K^T)**
 
@@ -929,20 +982,10 @@ sum = 2.42 + 2.03 + 2.25 = 6.70
 Softmax: [2.42, 2.03, 2.25] / 6.70
         = [0.361, 0.303, 0.336]
 
-These are our attention weights!
-
-┌─────────────────────────────────────────────────────────────┐
-│  "cat" attends to:                                         │
-│    "cat": 36.1% (itself, highest)                          │
-│    "sat": 30.3% (the verb)                                 │
-│    "mat": 33.6% (the location)                             │
-│                                                             │
-│  Interpretation: "cat" pays attention to all words,        │
-│  with slightly more to itself and "mat" (location)        │
-└─────────────────────────────────────────────────────────────┘
+These are the attention weights for "cat"!
 ```
 
-**Step 4: Weight Values**
+**Step 4: Weight Values (Final Output)**
 
 ```
 Final output = weighted sum of values:
@@ -956,25 +999,383 @@ Final output = weighted sum of values:
 
 This is the context-aware representation for "cat"!
 
-It's NOT just [1.0, 0.5] anymore - it contains information
-from "sat" and "mat" too!
+Original "cat":  [1.0, 0.5]
+New "cat":      [0.782, 0.719] ← Contains "sat" and "mat" info!
 ```
 
-### 7.3 Visual Summary
+---
+
+#### For "sat":
+
+**Step 1: Compute Attention Scores (Q × K^T)**
 
 ```
-        ATTENTION MATRIX (for "cat")
+For "sat" attending to all words:
+
+┌─────────────────────────────────────────────────────────────┐
+│  Q("sat") • K("cat") = [0.5, 1.0] • [1.0, 0.5]             │
+│                      = 0.5×1.0 + 1.0×0.5                   │
+│                      = 0.5 + 0.5 = 1.0                     │
+│                                                             │
+│  Q("sat") • K("sat") = [0.5, 1.0] • [0.5, 1.0]             │
+│                      = 0.5×0.5 + 1.0×1.0                   │
+│                      = 0.25 + 1.0 = 1.25                   │
+│                                                             │
+│  Q("sat") • K("mat") = [0.5, 1.0] • [0.8, 0.7]             │
+│                      = 0.5×0.8 + 1.0×0.7                   │
+│                      = 0.4 + 0.7 = 1.1                     │
+└─────────────────────────────────────────────────────────────┘
+
+Raw scores: [1.0, 1.25, 1.1]
+```
+
+**Step 2: Scale**
+
+```
+Scaled scores: [1.0, 1.25, 1.1] / 1.414
+             = [0.707, 0.884, 0.778]
+```
+
+**Step 3: Softmax**
+
+```
+exp([0.707, 0.884, 0.778]) = [2.03, 2.42, 2.18]
+sum = 2.03 + 2.42 + 2.18 = 6.63
+
+Softmax: [2.03, 2.42, 2.18] / 6.63
+        = [0.306, 0.365, 0.329]
+```
+
+**Step 4: Weight Values**
+
+```
+= 0.306 × [1.0, 0.5]    ("cat")
++ 0.365 × [0.5, 1.0]    ("sat")
++ 0.329 × [0.8, 0.7]    ("mat")
+
+= [0.306, 0.153] + [0.183, 0.365] + [0.263, 0.230]
+= [0.752, 0.748]
+
+Original "sat":  [0.5, 1.0]
+New "sat":      [0.752, 0.748] ← Contains "cat" and "mat" info!
+```
+
+---
+
+#### For "mat":
+
+**Step 1: Compute Attention Scores (Q × K^T)**
+
+```
+For "mat" attending to all words:
+
+┌─────────────────────────────────────────────────────────────┐
+│  Q("mat") • K("cat") = [0.8, 0.7] • [1.0, 0.5]             │
+│                      = 0.8×1.0 + 0.7×0.5                   │
+│                      = 0.8 + 0.35 = 1.15                   │
+│                                                             │
+│  Q("mat") • K("sat") = [0.8, 0.7] • [0.5, 1.0]             │
+│                      = 0.8×0.5 + 0.7×1.0                   │
+│                      = 0.4 + 0.7 = 1.1                     │
+│                                                             │
+│  Q("mat") • K("mat") = [0.8, 0.7] • [0.8, 0.7]             │
+│                      = 0.8×0.8 + 0.7×0.7                   │
+│                      = 0.64 + 0.49 = 1.13                  │
+└─────────────────────────────────────────────────────────────┘
+
+Raw scores: [1.15, 1.1, 1.13]
+```
+
+**Step 2: Scale**
+
+```
+Scaled scores: [1.15, 1.1, 1.13] / 1.414
+             = [0.813, 0.778, 0.799]
+```
+
+**Step 3: Softmax**
+
+```
+exp([0.813, 0.778, 0.799]) = [2.25, 2.18, 2.22]
+sum = 2.25 + 2.18 + 2.22 = 6.65
+
+Softmax: [2.25, 2.18, 2.22] / 6.65
+        = [0.338, 0.328, 0.334]
+```
+
+**Step 4: Weight Values**
+
+```
+= 0.338 × [1.0, 0.5]    ("cat")
++ 0.328 × [0.5, 1.0]    ("sat")
++ 0.334 × [0.8, 0.7]    ("mat")
+
+= [0.338, 0.169] + [0.164, 0.328] + [0.267, 0.234]
+= [0.769, 0.731]
+
+Original "mat":  [0.8, 0.7]
+New "mat":      [0.769, 0.731] ← Contains "cat" and "sat" info!
+```
+
+---
+
+### 7.3 Complete Attention Matrix
+
+Now we can fill in the complete attention matrix!
+
+```
+        COMPLETE ATTENTION MATRIX
 
          cat    sat    mat
         ┌──────┬──────┬──────┐
    cat  │ 36%  │ 30%  │ 34%  │
         ├──────┼──────┼──────┤
-   sat  │  ?   │  ?   │  ?   │  ← Compute similarly
+   sat  │ 31%  │ 36%  │ 33%  │
         ├──────┼──────┼──────┤
-   mat  │  ?   │  ?   │  ?   │
+   mat  │ 34%  │ 33%  │ 33%  │
         └──────┴──────┴──────┘
 
-       Darker color = higher attention
+Interpretation:
+- Each row shows how much that word attends to others
+- Each column shows how much that word is attended to
+- Diagonal is self-attention
+- All rows sum to 100% (guaranteed by softmax)
+```
+
+**Linguistic Intuition: What Do These Numbers Mean?**
+
+```
+Diagonal (~36%):
+  Each word attends to itself - this makes sense, as each word
+  carries core information (its identity, meaning)
+
+Off-diagonal (30-34%):
+  "cat" attends to "mat" (34%) → noun-location relationship
+  "cat" attends to "sat" (30%) → subject-verb relationship
+  "sat" attends to "cat" (31%) → verb-subject relationship
+  "mat" attends to "cat" (34%) → location-entity relationship
+
+These off-diagonal attentions ARE "understanding"!
+The model is building meaningful linguistic connections between words.
+```
+
+---
+
+### 7.3.1 Why This Matters?
+
+Now let's compare: what changed after attention?
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  Original vectors (independent):                           │
+│  "cat" → [1.0, 0.5]                                        │
+│                                                             │
+│  New vectors (context-aware):                              │
+│  "cat" → [0.782, 0.719]                                    │
+│                                                             │
+│  Change: Second dimension went from 0.5 → 0.719            │
+│          (that's a 44% increase!)                          │
+│                                                             │
+│  Why such a big increase?                                  │
+│  "sat" has second dimension 1.0 (high value)               │
+│  "mat" has second dimension 0.7 (medium-high value)        │
+│  Through attention, these values "flowed" into "cat"!      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**This is the Magic of Attention:**
+
+```
+Original isolated words → Interconnected representations
+
+      Independent                          Global
+          understanding                      understanding
+            ┊                                     ┊
+"cat" only knows itself          "cat" knows the whole sentence
+"sat" only knows itself          "sat" knows the whole sentence
+"mat" only knows itself           "mat" knows the whole sentence
+```
+
+**Why Multiple Layers?**
+
+After 1 layer: Each word sees immediately adjacent words
+After 6 layers: Each word can see the entire sentence
+
+In deep Transformers (like GPT's 96 layers), after multiple rounds of this processing,
+each word's representation contains **global context** — this is the mathematical foundation of "understanding"!
+
+**Connecting Back to Section 3's Question:**
+
+Remember we asked "Why do we need Transformers?" Now you have the answer:
+
+```
+Question: What does "it" refer to in:
+           "The trophy didn't fit in the suitcase because it was too large"?
+
+Answer: Through multiple layers of attention, "it"'s representation
+        strongly attends to "trophy" (not "suitcase"), because the
+        model learned semantic relationships!
+```
+
+---
+
+### 7.4 Where Does the Output Go?
+
+Now we have three context-aware representations:
+
+```
+Input (original):
+┌─────────────────────────────────────┐
+│  "cat" → [1.0, 0.5]                 │
+│  "sat" → [0.5, 1.0]                 │
+│  "mat" → [0.8, 0.7]                 │
+└─────────────────────────────────────┘
+              ↓
+      Attention computation (this section)
+              ↓
+Output (context-aware):
+┌─────────────────────────────────────┐
+│  "cat" → [0.782, 0.719]  ← New!     │
+│  "sat" → [0.752, 0.748]  ← New!     │
+│  "mat" → [0.769, 0.731]  ← New!     │
+└─────────────────────────────────────┘
+              ↓
+      Passed to next layer (feed-forward network)
+              ↓
+      Then to the next Transformer layer
+```
+
+**Key insights:**
+
+1. **Each new representation contains information from ALL other words**
+2. **These new vectors become the input to the next layer**
+3. **In multi-layer Transformers, this process repeats multiple times**
+4. **Each layer learns increasingly abstract relationships**
+
+**Connection to architecture:**
+
+In a full Transformer (as described in Section 5):
+- Encoder layer N's output → Decoder's cross-attention
+- Decoder uses these to generate translations, summaries, etc.
+- This is how "understanding" flows through the network!
+
+---
+
+### 7.5 How to Interpret Attention Visualizations
+
+When you see attention visualizations from tools like BertViz:
+
+```
+Example attention heatmap:
+
+        cat    sat    mat
+        ━━━━━━━━━━━━━━━━━
+   cat  ████  ░░░░  ████
+   sat  ████  ████  ░███
+   mat  ████  ░███  ████
+
+        Dark = High attention    Light = Low attention
+```
+
+**This tells you:**
+- Which words are attended to (position)
+- Strength of attention (color depth)
+- Relationships the model learned (patterns)
+
+**Real-world application example:**
+
+In translating a real sentence:
+```
+"The trophy didn't fit in the suitcase because it was too large"
+
+The attention visualization would show:
+- "it" strongly attends to "trophy" (because it's large)
+- "fit" attends to "trophy" and "suitcase" (action relationship)
+```
+
+---
+
+### 7.6 What You Learned
+
+**Computational skills:**
+- ✓ Compute attention scores (dot product)
+- ✓ Scale scores (divide by √d)
+- ✓ Apply softmax to convert to probabilities
+- ✓ Compute weighted sum (final output)
+
+**Conceptual understanding:**
+- ✓ **Why**: Create context-aware representations
+- ✓ **What**: Attention weights show relationship strength
+- ✓ **How used**: Output flows to next layer, ultimately generating results
+- ✓ **How to interpret**: Visualizations show learned connections
+
+**Important distinction:**
+
+```
+Attention ≠ Understanding
+
+Attention is a MECHANISM that enables understanding through multiple layers
+
+Think of it like:
+- Attention: asking "what should I pay attention to?"
+- Understanding: the accumulated knowledge after many layers of attention
+
+One layer of attention = local connections
+Six layers of attention = global understanding
+96 layers (GPT-3) = complex reasoning emerges
+```
+
+**Practical application:**
+- This is how ChatGPT, BERT, etc. "understand" text
+- Each layer does this, learning deeper relationships each time
+- Multi-head attention does this multiple times in parallel (Section 4.4)
+
+**Next steps:**
+Now you understand single-head attention computation. A full Transformer:
+1. Uses multiple heads (computes different attention patterns in parallel)
+2. Stacks multiple layers (learns increasingly abstract relationships)
+3. Feed-forward networks (process each context-aware representation)
+4. Encoder-decoder (for generation tasks like translation)
+
+---
+
+### 7.7 Common Pitfalls When Learning Attention
+
+**Pitfall 1: Thinking attention is "looking at nearby words"**
+
+Wrong: Self-attention only sees nearby words
+Right: Self-attention is GLOBAL (every token sees every token)
+       It learns WHICH connections are important, not limited to distance
+
+**Pitfall 2: Confusing attention weights with importance**
+
+Wrong: High attention = important word
+Right: Attention = "this word is relevant FOR THAT QUERY"
+       (Different heads learn different relationship patterns!)
+
+Example: In "The cat sat":
+- Head 1: "cat" highly attends to "sat" (subject-verb relationship)
+- Head 2: "cat" highly attends to "The" (article agreement)
+- Both are "correct" attention, just learning different patterns
+
+**Pitfall 3: Thinking more heads = always better**
+
+Wrong: Just add more heads for better performance
+Right: More heads help learn DIFFERENT relationship patterns
+       But diminishing returns set in; 8-12 heads is typical
+
+**Pitfall 4: Forgetting the scaling factor (√d)**
+
+Wrong: Skip the scaling step
+Right: Scaling prevents gradient instability in deep networks
+       (Without it, training would fail!)
+
+Why scaling matters:
+```
+Without scaling: dot products could be huge (like 100)
+                 exp(100) = numerical overflow!
+With scaling: dot products scaled to reasonable range
+              Gradients stable, training succeeds
 ```
 
 ---
